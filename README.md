@@ -3,6 +3,8 @@
 
 [![Genki Architectural Guardrails & CI](https://github.com/jmiguelrj/genki-lead-web-pitch/actions/workflows/ci.yml/badge.svg)](https://github.com/jmiguelrj/genki-lead-web-pitch/actions/workflows/ci.yml)
 
+**Live Cloudflare Pages Production Demo:** [https://genki-lead-web-pitch.pages.dev](https://genki-lead-web-pitch.pages.dev)
+
 **Systems over screens. Guardrails for speed.**
 
 ---

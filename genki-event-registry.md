@@ -62,9 +62,18 @@ All tasks, pre-flight audits, architectural milestones, and deployments on `genk
 
 ## [2026-11-11 21:56:00 -03:00] Task #6: Implement GitHub Actions CI/CD Pipeline, Cloudflare Security Headers, Wrangler v4 Config & Executive `README.md`
 
-- **Branch:** `feat/task-6-cicd-security-readme` -> merged `--no-ff` into `main`
+- **Branch:** `feat/task-6-cicd-security-readme` (`d9e80be`) -> merged `--no-ff` into `main` (`fc4337a`)
 - **Summary:**
   1. Authored `scripts/verify-bundle-budget.mjs` enforcing uncompressed bundle ceilings (`< 25 KB` per React 19 feature island JS chunk and `< 40 KB` for compiled CSS in `apps/pitch-site/dist/_astro/`) and wired `pnpm budget` into root `package.json` (`check:all`).
   2. Installed `wrangler` (`^4.160.1`) in `apps/pitch-site`, added the `deploy` script (`wrangler pages deploy dist --project-name=genki-lead-web-pitch`), created `apps/pitch-site/wrangler.jsonc`, and configured `apps/pitch-site/public/_headers` with strict security headers (`X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`, hydration-safe `Content-Security-Policy`) and immutable `/_astro/*` asset caching.
   3. Created `.github/workflows/ci.yml` with least-privilege `contents: read` permissions on `ubuntu-latest` (Node 24 + `pnpm/action-setup@v4` + `--frozen-lockfile`) executing all 5 verification gates (`guardrails`, `lint`, `typecheck`, `build`, `budget`).
-  4. Authored the founder-facing root `README.md` detailing the monorepo rationale, workspace architecture tree, safe non-engineer AI shipping workflow, local quickstart, and author profile, passed `pnpm check:all` locally, merged `--no-ff` to `main`, synced `root@<ops-vps-host>`, and verified GitHub Actions CI run completion (`conclusion: "success"`).
+  4. Authored the founder-facing root `README.md` detailing the monorepo rationale, workspace architecture tree, safe non-engineer AI shipping workflow, local quickstart, and author profile, passed `pnpm check:all` locally, merged `--no-ff` to `main`, synced `root@<ops-vps-host>`, and verified GitHub Actions CI run completion (`conclusion: "success"`, Run ID `43131946378`).
+
+## [2026-11-11 22:14:30 -03:00] Task #7: Authenticate & Deploy Live to Cloudflare Pages via Wrangler v4, Audit Live Edge Headers & Update Repo Live Links
+
+- **Branch:** `feat/task-7-cloudflare-live-deployment` -> merged `--no-ff` into `main`
+- **Live Production URL:** `https://genki-lead-web-pitch.pages.dev` (`https://93c0a40a.genki-lead-web-pitch.pages.dev`)
+- **Summary:**
+  1. Verified Cloudflare Wrangler v4 (`4.160.1`) OAuth authentication (`<cloudflare-account>`, Account ID `<cloudflare-account>`), created Cloudflare Pages project `genki-lead-web-pitch` (`--production-branch=main`), and deployed `apps/pitch-site/dist` to production (`https://genki-lead-web-pitch.pages.dev`).
+  2. Audited live edge response headers via `curl.exe -sI https://genki-lead-web-pitch.pages.dev/` (`HTTP/1.1 200 OK`, `x-frame-options: DENY`, `x-content-type-options: nosniff`, `referrer-policy: strict-origin-when-cross-origin`, `permissions-policy`, `content-security-policy`) and `/_astro/MigrationBlueprint.DjaJnJOt.js` (`Cache-Control: public, max-age=31536000, immutable`).
+  3. Injected the live production link (`https://genki-lead-web-pitch.pages.dev`) into `README.md`, added Cloudflare Pages deployment & rollback procedures to `GENKI-SOP.md`, logged Task #7 in `genki-event-registry.md`, passed `pnpm check:all`, merged `--no-ff` to `main`, verified GitHub Actions CI run completion (`conclusion: "success"`), and synchronized `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`.

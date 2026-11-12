@@ -7,6 +7,7 @@ Before executing development, audit, or deployment tasks on `genki-lead-web-pitc
 
 - **Local Workspace:** `C:\repos\genki` (`pnpm` workspace root covering `packages/*` and `apps/*`)
 - **Remote GitHub Origin:** `https://github.com/jmiguelrj/genki-lead-web-pitch.git` (`main` branch)
+- **Live Cloudflare Pages Edge Origin:** `https://genki-lead-web-pitch.pages.dev` (`genki-lead-web-pitch` Pages project, production branch `main`)
 - **Remote Operations Host:** `root@<ops-vps-host>:/opt/genki-lead-web-pitch`
 - **Tooling & Workspace Dependencies:**
   - Local Windows: `node -v` (`>= 24.0.0`, currently `v24.13.0`), `pnpm -v` (`>= 10.0.0`, currently `10.33.0`), `git --version` (`2.56.0.windows.2`).
@@ -45,10 +46,16 @@ Before executing development, audit, or deployment tasks on `genki-lead-web-pitc
 
 2. Log every task sequentially in `genki-event-registry.md` with its ISO timestamp, branch reference, and summary.
 
-### 2.3 Git Merge & Remote Operations Synchronization (`<ops-vps-host>`)
+### 2.3 Git Merge, Cloudflare Pages Edge Deployment & Remote VPS Sync (`<ops-vps-host>`)
 
 1. Merge the verified feature branch into `main` (`git checkout main && git merge --no-ff <branch>`) and push to `origin/main`.
-2. Synchronize `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`:
+2. Deploy the verified static build (`apps/pitch-site/dist`) to Cloudflare Pages (`https://genki-lead-web-pitch.pages.dev`) via Wrangler v4:
+
+   ```powershell
+   pnpm --filter @genki-pitch/site run deploy
+   ```
+
+3. Synchronize `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`:
 
    ```bash
    ssh -o BatchMode=yes -o ConnectTimeout=10 root@<ops-vps-host> "cd /opt/genki-lead-web-pitch && git pull origin main"
@@ -80,6 +87,13 @@ If any verification gate fails during execution, execute the applicable rollback
   ```powershell
   git -C C:\repos\genki reset --hard <last-good-commit>
   ssh -o BatchMode=yes root@<ops-vps-host> "cd /opt/genki-lead-web-pitch && git reset --hard <last-good-commit>"
+  ```
+
+- **Cloudflare Pages Deployment Rollback:**
+
+  ```powershell
+  pnpm --filter @genki-pitch/site exec wrangler pages deployment list --project-name=genki-lead-web-pitch
+  pnpm --filter @genki-pitch/site exec wrangler pages deployment rollback <deployment-id> --project-name=genki-lead-web-pitch
   ```
 
 - **MCP Configuration Rollback:**
