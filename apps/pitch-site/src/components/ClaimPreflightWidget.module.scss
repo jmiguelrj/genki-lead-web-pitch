@@ -79,7 +79,8 @@
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.35;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .panel {
