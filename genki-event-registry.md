@@ -71,9 +71,16 @@ All tasks, pre-flight audits, architectural milestones, and deployments on `genk
 
 ## [2026-11-11 22:14:30 -03:00] Task #7: Authenticate & Deploy Live to Cloudflare Pages via Wrangler v4, Audit Live Edge Headers & Update Repo Live Links
 
-- **Branch:** `feat/task-7-cloudflare-live-deployment` -> merged `--no-ff` into `main`
+- **Branch:** `feat/task-7-cloudflare-live-deployment` (`5373249`) -> merged `--no-ff` into `main` (`937a7c3`)
 - **Live Production URL:** `https://genki-lead-web-pitch.pages.dev` (`https://93c0a40a.genki-lead-web-pitch.pages.dev`)
 - **Summary:**
-  1. Verified Cloudflare Wrangler v4 (`4.160.1`) OAuth authentication (`<cloudflare-account>`, Account ID `<cloudflare-account>`), created Cloudflare Pages project `genki-lead-web-pitch` (`--production-branch=main`), and deployed `apps/pitch-site/dist` to production (`https://genki-lead-web-pitch.pages.dev`).
+  1. Verified Cloudflare Wrangler v4 (`4.160.1`) OAuth authentication, created Cloudflare Pages project `genki-lead-web-pitch` (`--production-branch=main`), and deployed `apps/pitch-site/dist` to production (`https://genki-lead-web-pitch.pages.dev`).
   2. Audited live edge response headers via `curl.exe -sI https://genki-lead-web-pitch.pages.dev/` (`HTTP/1.1 200 OK`, `x-frame-options: DENY`, `x-content-type-options: nosniff`, `referrer-policy: strict-origin-when-cross-origin`, `permissions-policy`, `content-security-policy`) and `/_astro/MigrationBlueprint.DjaJnJOt.js` (`Cache-Control: public, max-age=31536000, immutable`).
-  3. Injected the live production link (`https://genki-lead-web-pitch.pages.dev`) into `README.md`, added Cloudflare Pages deployment & rollback procedures to `GENKI-SOP.md`, logged Task #7 in `genki-event-registry.md`, passed `pnpm check:all`, merged `--no-ff` to `main`, verified GitHub Actions CI run completion (`conclusion: "success"`), and synchronized `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`.
+  3. Injected the live production link (`https://genki-lead-web-pitch.pages.dev`) into `README.md`, added Cloudflare Pages deployment & rollback procedures to `GENKI-SOP.md`, logged Task #7 in `genki-event-registry.md`, passed `pnpm check:all`, merged `--no-ff` to `main`, verified GitHub Actions CI run completion (`conclusion: "success"`, Run ID `43133373010`), and synchronized `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`.
+
+## [2026-11-11 23:03:10 -03:00] Task #8: Redact Internal Server IP & Local User Paths from Public Docs
+
+- **Branch:** `chore/redact-infra-identifiers` -> merged `--no-ff` into `main`
+- **Summary:**
+  1. Replaced raw production VPS host IP addresses with `<ops-vps-host>` and local OS user directory paths with `<user-home>` across `GENKI-SOP.md` and `genki-event-registry.md`.
+  2. Passed `pnpm check:all`, merged `--no-ff` into `main`, pushed to `origin/main`, synchronized `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`, and verified GitHub Actions CI run completion (`conclusion: "success"`).
