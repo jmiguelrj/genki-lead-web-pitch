@@ -18,7 +18,7 @@ This repository is an AI-guarded monorepo built to empower cross-functional team
 The following paths are protected by `.github/CODEOWNERS` and must not be modified without explicit Lead Web Engineer approval:
 
 - `/packages/ui/` — Shared React/Astro component primitives & `--genki-*` design token definitions.
-- `/scripts/` — Automated guardrail & CI verification engines (`verify-guardrails.mjs`).
+- `/scripts/` — Automated guardrail & CI verification engines (`verify-guardrails.mjs`, `verify-bundle-budget.mjs`).
 - `/CLAUDE.md` — AI-agentic governance contract.
 - `/tsconfig.base.json` — Monorepo-wide ultra-strict TypeScript compiler baseline.
 - `/.github/` — `CODEOWNERS` and GitHub Actions CI/CD workflows.

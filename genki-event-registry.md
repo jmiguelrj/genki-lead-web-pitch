@@ -53,9 +53,18 @@ All tasks, pre-flight audits, architectural milestones, and deployments on `genk
 
 ## [2026-11-11 21:47:30 -03:00] Task #5: Build Interactive React Islands #2 (`SafeAgentSimulator`) & #3 (`ClaimPreflightWidget`) and Wire into `index.astro`
 
-- **Branch:** `feat/task-5-agent-and-claims-islands` -> merged `--no-ff` into `main`
+- **Branch:** `feat/task-5-agent-and-claims-islands` (`5ad0933`) -> merged `--no-ff` into `main` (`87fa405`)
 - **Summary:**
   1. Built Interactive React 19 Island #2 (`SafeAgentSimulator.tsx`, `SafeAgentSimulator.types.ts`, `SafeAgentSimulator.data.ts`, `SafeAgentSimulator.escalation.ts`, `SafeAgentSimulator.module.scss`) simulating 3 real-world non-engineer AI prompts against `CLAUDE.md`, `.github/CODEOWNERS`, and `scripts/verify-guardrails.mjs` with live `TerminalGate` verification and remediation guidance.
   2. Built Interactive React 19 Island #3 (`ClaimPreflightWidget.tsx`, `ClaimPreflightWidget.types.ts`, `ClaimPreflightWidget.data.ts`, `ClaimPreflightWidget.bali.ts`, `ClaimPreflightWidget.module.scss`) showcasing a 3-sample interactive medical claim pre-flight intake widget (`Genki Traveler` vs. `Genki Native`), interactive receipt checklist toggles, deterministic confidence scoring (`0%–98%`), and real-time adjudication status (`Auto-Adjudication Ready` vs. `Missing Documentation`).
   3. Wired `<SafeAgentSimulator client:visible />` (Section 02: `#agent-guardrails`) and `<ClaimPreflightWidget client:visible />` (Section 03: `#claim-preflight`) into `apps/pitch-site/src/pages/index.astro`, replacing the Task #4 placeholders and removing unused placeholder styles from `index.module.scss`.
   4. Verified all files stay strictly `< 200` lines across the new islands (`< 250` lines repo-wide), passed `pnpm check:all` (`0` guardrail violations across 9 `*.module.scss` and 21 `.ts`/`.tsx`/`.astro` files, `0` Biome lint errors, `0` `astro check`/`tsc` diagnostics, and clean static bundle output in `apps/pitch-site/dist/_astro/`), merged `--no-ff` into `main`, pushed to `origin/main`, and synced `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`.
+
+## [2026-11-11 21:56:00 -03:00] Task #6: Implement GitHub Actions CI/CD Pipeline, Cloudflare Security Headers, Wrangler v4 Config & Executive `README.md`
+
+- **Branch:** `feat/task-6-cicd-security-readme` -> merged `--no-ff` into `main`
+- **Summary:**
+  1. Authored `scripts/verify-bundle-budget.mjs` enforcing uncompressed bundle ceilings (`< 25 KB` per React 19 feature island JS chunk and `< 40 KB` for compiled CSS in `apps/pitch-site/dist/_astro/`) and wired `pnpm budget` into root `package.json` (`check:all`).
+  2. Installed `wrangler` (`^4.160.1`) in `apps/pitch-site`, added the `deploy` script (`wrangler pages deploy dist --project-name=genki-lead-web-pitch`), created `apps/pitch-site/wrangler.jsonc`, and configured `apps/pitch-site/public/_headers` with strict security headers (`X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`, hydration-safe `Content-Security-Policy`) and immutable `/_astro/*` asset caching.
+  3. Created `.github/workflows/ci.yml` with least-privilege `contents: read` permissions on `ubuntu-latest` (Node 24 + `pnpm/action-setup@v4` + `--frozen-lockfile`) executing all 5 verification gates (`guardrails`, `lint`, `typecheck`, `build`, `budget`).
+  4. Authored the founder-facing root `README.md` detailing the monorepo rationale, workspace architecture tree, safe non-engineer AI shipping workflow, local quickstart, and author profile, passed `pnpm check:all` locally, merged `--no-ff` to `main`, synced `root@<ops-vps-host>`, and verified GitHub Actions CI run completion (`conclusion: "success"`).

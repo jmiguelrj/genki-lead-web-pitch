@@ -12,7 +12,8 @@
     "typecheck": "pnpm -r typecheck",
     "lint": "biome check .",
     "guardrails": "node scripts/verify-guardrails.mjs",
-    "check:all": "pnpm guardrails && pnpm lint && pnpm typecheck && pnpm build"
+    "budget": "node scripts/verify-bundle-budget.mjs",
+    "check:all": "pnpm guardrails && pnpm lint && pnpm typecheck && pnpm build && pnpm budget"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.7",
@@ -27,7 +28,8 @@
     "onlyBuiltDependencies": [
       "@parcel/watcher",
       "esbuild",
-      "sharp"
+      "sharp",
+      "workerd"
     ]
   }
 }
