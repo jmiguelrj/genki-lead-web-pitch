@@ -1,0 +1,156 @@
+---
+// @genki-alias: [GENKI-SITE-INDEX-PAGE]
+import { Badge, Button, Card } from '@genki-pitch/ui';
+import { MigrationBlueprint } from '../components/MigrationBlueprint';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import styles from './index.module.scss';
+
+const repoUrl = 'https://github.com/jmiguelrj/genki-lead-web-pitch';
+---
+
+<BaseLayout
+  title="Systems Over Screens · Genki Lead Web Engineer Architectural Pitch"
+  description="Architectural blueprint and AI-guarded pnpm monorepo unifying Genki's web surfaces into Astro + Vite/React Router with SCSS token guardrails."
+>
+  <div class={styles.stack}>
+    <!-- Hero Section (Zero-JS Astro) -->
+    <section class={styles.hero} aria-labelledby="hero-heading">
+      <div class={styles.heroCopy}>
+        <Badge variant="emerald" dot>
+          Lead Web Engineer · Technical Vision &amp; Live Monorepo
+        </Badge>
+        <h1 id="hero-heading" class={styles.headline}>
+          Systems over screens. Guardrails for speed.
+        </h1>
+        <p class={styles.subtitle}>
+          A pragmatic architectural blueprint for unifying Genki&apos;s organic web surfaces,
+          phasing out Next.js cleanly into Astro static edge delivery and Vite + React Router
+          member portals, and empowering Marketing, Design, and Ops to ship safely with AI
+          coding agents inside a deterministic pnpm monorepo.
+        </p>
+        <div class={styles.ctaRow}>
+          <Button href="#blueprints" variant="primary" size="lg">
+            Explore Interactive Blueprints
+          </Button>
+          <Button href={repoUrl} external variant="secondary" size="lg">
+            Inspect Monorepo &amp; CLAUDE.md on GitHub ↗
+          </Button>
+        </div>
+      </div>
+
+      <div class={styles.metricsBar} aria-label="Key architectural metrics">
+        <div class={styles.metricItem}>
+          <span class={styles.metricStat}>0 KB</span>
+          <span class={styles.metricCaption}>Default Astro JS shipped on content &amp; SEO pages</span>
+        </div>
+        <div class={styles.metricItem}>
+          <span class={styles.metricStat}>100%</span>
+          <span class={styles.metricCaption}>SCSS design-token enforcement via CI guardrails</span>
+        </div>
+        <div class={styles.metricItem}>
+          <span class={styles.metricStat}>pnpm</span>
+          <span class={styles.metricCaption}>Unified @genki/ui + apps monorepo workspace</span>
+        </div>
+        <div class={styles.metricItem}>
+          <span class={styles.metricStat}>4–5h</span>
+          <span class={styles.metricCaption}>Daily synchronous BRT ↔ CET overlap with Cologne</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 01: Interactive Module #1 -->
+    <section id="blueprints" class={styles.section} aria-labelledby="section-01-heading">
+      <div class={styles.sectionHeader}>
+        <span class={styles.sectionKicker}>Section 01 · Interactive Architecture Module</span>
+        <h2 id="section-01-heading" class={styles.sectionTitle}>
+          Consolidating Organic Web Sprawl into Astro + React Router
+        </h2>
+        <p class={styles.sectionLead}>
+          Explore the current pain points, the target split between public SEO surfaces and the
+          authenticated Wave Claims portal, and the 3-phase Cloudflare strangler cutover plan.
+        </p>
+      </div>
+      <MigrationBlueprint client:visible />
+    </section>
+
+    <!-- Structural Slots for Section 02 & Section 03 (Task #5) -->
+    <div class={styles.placeholderGrid}>
+      <section
+        id="agent-guardrails"
+        class={styles.placeholderSlot}
+        aria-labelledby="section-02-heading"
+      >
+        <Badge variant="neutral" dot>Section 02 · Interactive Module Slot</Badge>
+        <h2 id="section-02-heading" class={styles.sectionTitle}>
+          Safe AI-Agentic Contribution Simulator
+        </h2>
+        <p class={styles.placeholderCopy}>
+          Structural slot reserved for <code>SafeAgentSimulator</code>—demonstrating how
+          <code>CLAUDE.md</code>, <code>CODEOWNERS</code>, and <code>verify-guardrails.mjs</code>
+          let non-engineers ship pages autonomously while blocking token drift and unsafe markup.
+        </p>
+      </section>
+
+      <section
+        id="claim-preflight"
+        class={styles.placeholderSlot}
+        aria-labelledby="section-03-heading"
+      >
+        <Badge variant="neutral" dot>Section 03 · Interactive Module Slot</Badge>
+        <h2 id="section-03-heading" class={styles.sectionTitle}>
+          Wave Claims Deterministic Pre-Flight Widget
+        </h2>
+        <p class={styles.placeholderCopy}>
+          Structural slot reserved for <code>ClaimPreflightWidget</code>—showcasing client-side
+          invoice line-item math verification and coverage validation before Claim OS submission.
+        </p>
+      </section>
+    </div>
+
+    <!-- Footer: Execution Track Record (Zero-JS Astro using @genki-pitch/ui Card) -->
+    <footer id="track-record" class={styles.footerSection} aria-labelledby="track-record-heading">
+      <div class={styles.sectionHeader}>
+        <span class={styles.sectionKicker}>Execution Track Record · João Miguel</span>
+        <h2 id="track-record-heading" class={styles.sectionTitle}>
+          Systems Built and Operated in Production
+        </h2>
+      </div>
+
+      <div class={styles.trackGrid}>
+        <Card
+          eyebrow="01 · Operations Scale"
+          title="Production Web & Operations Systems"
+        >
+          <Badge slot="badge" variant="emerald">60 Properties</Badge>
+          <p class={styles.cardParagraph}>
+            End-to-end architecture of mobile-first PWAs, storefronts, and automated operational
+            workflows powering 60 short-term rental properties with up to 25 daily turnovers.
+          </p>
+        </Card>
+
+        <Card
+          eyebrow="02 · Deterministic Velocity"
+          title="AI-Agentic Engineering & Guardrails"
+        >
+          <Badge slot="badge" variant="pass">Zero Drift</Badge>
+          <p class={styles.cardParagraph}>
+            Daily execution with CLI/IDE coding agents, MCP integrations, and strict multi-version
+            Agent Rulesets preventing UI drift, type erosion, and production regressions.
+          </p>
+        </Card>
+
+        <Card
+          eyebrow="03 · Claim OS Alignment"
+          title="Document & Financial Intelligence"
+        >
+          <Badge slot="badge" variant="emerald">IntelliBill</Badge>
+          <p class={styles.cardParagraph}>
+            Creator of <strong>IntelliBill</strong> (AI invoice scanning, line-item normalization,
+            and deterministic math verification) backed by a B.Sc. in Economics &amp; accounting
+            foundation—directly aligned with Genki&apos;s <em>Wave Claims (Claim OS)</em> direction.
+          </p>
+        </Card>
+      </div>
+    </footer>
+  </div>
+</BaseLayout>
