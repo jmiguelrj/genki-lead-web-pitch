@@ -35,9 +35,18 @@ All tasks, pre-flight audits, architectural milestones, and deployments on `genk
 
 ## [2026-11-11 21:12:35 -03:00] Task #3: Build Shared Design System & Component Library (`packages/ui` — React 19 + TypeScript + SCSS Modules)
 
-- **Branch:** `feat/task-3-shared-ui-library` -> merged `--no-ff` into `main`
+- **Branch:** `feat/task-3-shared-ui-library` (`6d7d7c7`) -> merged `--no-ff` into `main` (`e4ee0a0`)
 - **Summary:**
   1. Scaffolded `packages/ui` (`@genki-pitch/ui@0.1.0`) with package exports (`.` and `./tokens.scss`), `tsconfig.json` extending `../../tsconfig.base.json`, `src/css-modules.d.ts`, and installed `react` (`^19.3.1`), `react-dom` (`^19.3.1`), `@types/react`, `@types/react-dom`, and `sass-embedded`; removed placeholder `packages/.gitkeep`.
   2. Authored `packages/ui/src/tokens/tokens.scss` establishing the single-source-of-truth `:root` CSS Custom Properties (`--genki-*`) across editorial off-white surfaces, botanical emerald accents, status colors, font stacks, 4px modular spacing scale, radii, shadows, and base resets.
   3. Built 4 reusable, strictly typed React 19 components bound exclusively to `var(--genki-*)` SCSS Modules (`exactOptionalPropertyTypes: true`, `noUncheckedIndexedAccess: true`): `Badge` (`neutral | emerald | pass | warn | block`), `Card` (`eyebrow`, `title`, `badge`, `elevated`), `Button` (`primary | secondary | ghost` with polymorphic button/anchor semantics), and `TerminalGate` (dark-mode CI/guardrail verification readout card), exported from `packages/ui/src/index.ts`.
   4. Passed `pnpm check:all` (`pnpm guardrails` scanning 4 `*.module.scss` and 6 `.ts`/`.tsx` files with `0` violations, `pnpm lint`, `pnpm typecheck`, and `pnpm build`), merged `--no-ff` into `main`, pushed to `origin/main`, and synchronized `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`.
+
+## [2026-11-11 21:22:54 -03:00] Task #4: Scaffold `apps/pitch-site` (Astro + Vite + React 19 Islands) & Build Interactive Module #1 (`MigrationBlueprint.tsx`)
+
+- **Branch:** `feat/task-4-astro-shell-migration-island` -> merged `--no-ff` into `main`
+- **Summary:**
+  1. Scaffolded `apps/pitch-site` (`@genki-pitch/site@0.1.0`) linked to `@genki-pitch/ui` (`workspace:*`) with `astro` (`^7.4.11`), `@astrojs/react` (`^7.1.8`), `@astrojs/check` (`^0.9.12`), `react` (`^19.3.1`), `sass-embedded`, and `typescript` (`^6.0.3`), configured `astro.config.mjs` (`output: 'static'`, `vite.ssr.noExternal: ['@genki-pitch/ui']`), and removed placeholder `apps/.gitkeep`.
+  2. Built the zero-JS editorial shell (`BaseLayout.astro` + `BaseLayout.module.scss` and `index.astro` + `index.module.scss`) featuring global `@genki-pitch/ui/tokens.scss` import, sticky header navigation, Hero section (`"Systems over screens. Guardrails for speed."` + 4 architectural metric callouts), structural slots for Sections 02 & 03, and the 3-column Execution Track Record footer.
+  3. Built Interactive React 19 Island #1 (`MigrationBlueprint.tsx`, `MigrationBlueprint.data.ts`, `MigrationBlueprint.module.scss`) hydrated via `client:visible`, enabling live switching across _Legacy Next.js Sprawl_, _Unified Astro + React Router Monorepo_, and _Zero-Downtime Strangler Plan_ using shared `@genki-pitch/ui` `Card`, `Badge`, and `TerminalGate` components.
+  4. Verified `pnpm check:all` (`0` guardrail violations across 7 `*.module.scss` and 13 `.ts`/`.tsx`/`.astro` files, `0` Biome lint errors, `0` `astro check` / `tsc` diagnostics, and clean static bundle emission into `apps/pitch-site/dist`), merged `--no-ff` into `main`, pushed to `origin/main`, and synced `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`.

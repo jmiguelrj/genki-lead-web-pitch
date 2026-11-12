@@ -1,0 +1,61 @@
+---
+// @genki-alias: [GENKI-SITE-LAYOUT]
+import '@genki-pitch/ui/tokens.scss';
+import { Button } from '@genki-pitch/ui';
+import styles from './BaseLayout.module.scss';
+
+export interface Props {
+  readonly title: string;
+  readonly description: string;
+}
+
+const { title, description } = Astro.props;
+const repoUrl = 'https://github.com/jmiguelrj/genki-lead-web-pitch';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="theme-color" content="#0e7c59" />
+  </head>
+  <body class={styles.page}>
+    <header class={styles.header}>
+      <nav class={styles.navInner} aria-label="Primary architecture navigation">
+        <div class={styles.brandGroup}>
+          <span class={styles.brandMark} aria-hidden="true"></span>
+          <a href="#" class={styles.brandTitle}>
+            Genki Lead Web Engineer — Architectural Pitch
+          </a>
+          <span class={styles.divider} aria-hidden="true">/</span>
+          <span class={styles.authorMeta}>João Miguel · Rio de Janeiro (UTC-3)</span>
+        </div>
+        <div class={styles.navActions}>
+          <a href="#blueprints" class={styles.navLink}>Blueprints</a>
+          <a href="#track-record" class={styles.navLink}>Track Record</a>
+          <Button href={repoUrl} external variant="secondary" size="sm">
+            GitHub Monorepo ↗
+          </Button>
+        </div>
+      </nav>
+    </header>
+
+    <main class={styles.main}>
+      <slot />
+    </main>
+
+    <div class={styles.bottomBar}>
+      <div class={styles.bottomInner}>
+        <span>@genki-pitch/site · Astro Static Shell + React 19 Islands + SCSS Token Guardrails</span>
+        <span>Built for Genki · Cologne (CET) ↔ Rio de Janeiro (UTC-3)</span>
+      </div>
+    </div>
+  </body>
+</html>
