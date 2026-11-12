@@ -24,7 +24,7 @@ Before executing development, audit, or deployment tasks on `genki-lead-web-pitc
 
 1. **Tech Stack & Workspace Layout:**
    - **`packages/ui` (`@genki-pitch/ui`):** Exports single-source-of-truth semantic tokens (`@genki-pitch/ui/tokens.scss`) and strictly typed React 19 primitives (`Badge`, `Button`, `Card`, `TerminalGate`).
-   - **`apps/pitch-site` (`@genki-pitch/site`):** Static-first Astro application (`output: 'static'` with `vite.ssr.noExternal: ['@genki-pitch/ui']`) rendering zero-JS editorial shells (`BaseLayout.astro`, `index.astro`) and selective `client:visible` React 19 islands (`MigrationBlueprint.tsx`).
+   - **`apps/pitch-site` (`@genki-pitch/site`):** Static-first Astro application (`output: 'static'` with `vite.ssr.noExternal: ['@genki-pitch/ui']`) rendering zero-JS editorial shells (`BaseLayout.astro`, `index.astro`) and selective `client:visible` React 19 islands (`MigrationBlueprint.tsx`, `SafeAgentSimulator.tsx`, `ClaimPreflightWidget.tsx`).
 2. **Governance & Role Boundaries (`CLAUDE.md` & `.github/CODEOWNERS`):**
    - Non-engineers and AI agents compose pages inside `apps/pitch-site/src/pages/` using `@genki-pitch/ui` components.
    - Core infrastructure (`/packages/ui/`, `/scripts/`, `/CLAUDE.md`, `/tsconfig.base.json`, `/.github/`) is protected by `.github/CODEOWNERS` (`@jmiguelrj`).
