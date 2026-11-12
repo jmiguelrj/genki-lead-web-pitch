@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build & Framework Outputs
+dist/
+.astro/
+.wrangler/
+
+# Environment & Secrets
+.env*
+!.env.example
+
+# Logs & OS Artifacts
+*.log
+.DS_Store
