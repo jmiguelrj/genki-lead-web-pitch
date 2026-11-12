@@ -8,6 +8,26 @@
   overflow-x: clip;
 }
 
+.skipLink {
+  position: absolute;
+  left: var(--genki-space-4);
+  top: -10rem;
+  z-index: 60;
+  padding: var(--genki-space-2) var(--genki-space-4);
+  background-color: var(--genki-accent-primary);
+  color: var(--genki-text-on-accent);
+  border-radius: var(--genki-radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:focus-visible {
+    top: var(--genki-space-2);
+    outline: none;
+    box-shadow: var(--genki-focus-ring);
+  }
+}
+
 .header {
   position: sticky;
   top: 0;
@@ -47,9 +67,16 @@
   display: inline-flex;
   align-items: center;
   gap: var(--genki-space-2);
+  padding: var(--genki-space-1);
+  border-radius: var(--genki-radius-sm);
   text-decoration: none;
   white-space: nowrap;
   min-width: 0;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--genki-focus-ring);
+  }
 }
 
 .brandMark {
@@ -120,6 +147,11 @@
   &:hover {
     color: var(--genki-accent-primary);
   }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--genki-focus-ring);
+  }
 }
 
 .main {
@@ -128,6 +160,7 @@
   max-width: 74rem;
   margin: 0 auto;
   padding: var(--genki-space-8) var(--genki-space-5) var(--genki-space-12);
+  scroll-margin-top: var(--genki-scroll-offset);
   overflow-x: clip;
 }
 

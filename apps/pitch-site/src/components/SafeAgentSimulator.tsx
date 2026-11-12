@@ -1,6 +1,6 @@
 // @genki-alias: [GENKI-SITE-AGENT-SIM-ISLAND]
 import { Badge, Card, TerminalGate } from '@genki-pitch/ui';
-import { useState } from 'react';
+import { type KeyboardEvent, useState } from 'react';
 import { AGENT_SCENARIOS } from './SafeAgentSimulator.data';
 import styles from './SafeAgentSimulator.module.scss';
 import type {
@@ -19,6 +19,25 @@ export function SafeAgentSimulator() {
     return null;
   }
 
+  const handleTabKeyDown = (
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    const count = AGENT_SCENARIOS.length;
+    if (count === 0) return;
+    let nextIndex: number | null = null;
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % count;
+    else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + count) % count;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = count - 1;
+    if (nextIndex === null) return;
+    event.preventDefault();
+    const nextScenario = AGENT_SCENARIOS[nextIndex];
+    if (!nextScenario) return;
+    setActiveId(nextScenario.id);
+    document.getElementById(`agent-tab-${nextScenario.id}`)?.focus();
+  };
+
   return (
     <div className={styles.wrapper}>
       <div
@@ -26,7 +45,7 @@ export function SafeAgentSimulator() {
         role="tablist"
         aria-label="Cross-department AI coding agent guardrail scenarios"
       >
-        {AGENT_SCENARIOS.map((scenario) => {
+        {AGENT_SCENARIOS.map((scenario, idx) => {
           const isActive = scenario.id === activeScenario.id;
           const btnClass = [
             styles.scenarioButton,
@@ -41,10 +60,12 @@ export function SafeAgentSimulator() {
               id={`agent-tab-${scenario.id}`}
               type="button"
               role="tab"
+              tabIndex={isActive ? 0 : -1}
               aria-selected={isActive}
               aria-controls={`agent-panel-${scenario.id}`}
               className={btnClass}
               onClick={() => setActiveId(scenario.id)}
+              onKeyDown={(event) => handleTabKeyDown(event, idx)}
             >
               <div className={styles.tabHeaderRow}>
                 <span className={styles.tabCode}>{scenario.code}</span>

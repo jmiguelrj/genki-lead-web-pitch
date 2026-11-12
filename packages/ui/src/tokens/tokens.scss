@@ -11,26 +11,32 @@
   --genki-bg-terminal: #0c1310;
   --genki-bg-terminal-row: #121c18;
 
-  /* Editorial & Terminal Typography Colors */
+  /* Editorial & Terminal Typography Colors (WCAG AA >= 4.5:1 verified) */
   --genki-text-primary: #0f1713;
   --genki-text-secondary: #3f4d45;
-  --genki-text-muted: #697870;
+  --genki-text-muted: #4f5e56;
   --genki-text-on-accent: #ffffff;
   --genki-text-terminal: #e4ede8;
-  --genki-text-terminal-muted: #8ba195;
+  --genki-text-terminal-muted: #9bb0a5;
 
   /* Botanical Emerald Brand Accents */
-  --genki-accent-primary: #0e7c59;
-  --genki-accent-hover: #0a6347;
+  --genki-accent-primary: #0d7554;
+  --genki-accent-hover: #0a5c42;
   --genki-accent-soft: #e6f4ef;
 
-  /* Deterministic Guardrail Status Palette */
-  --genki-status-pass: #0f7b55;
+  /* Deterministic Guardrail Status Palette (Light Surfaces) */
+  --genki-status-pass: #0c6e4b;
   --genki-status-pass-bg: #e6f5ef;
-  --genki-status-warn: #b45309;
+  --genki-status-warn: #9a4406;
   --genki-status-warn-bg: #fef3c7;
   --genki-status-block: #be123c;
   --genki-status-block-bg: #ffe4e6;
+
+  /* High-Contrast Dark Terminal Status Palette (> 6.5:1 on #121c18) */
+  --genki-terminal-accent: #34d399;
+  --genki-terminal-pass: #34d399;
+  --genki-terminal-warn: #fbbf24;
+  --genki-terminal-block: #fb7185;
 
   /* Borders & Hairlines */
   --genki-border-subtle: #e2e8e4;
@@ -43,7 +49,7 @@
   sans-serif;
   --genki-font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
 
-  /* Modular Spacing Scale (4px base unit) */
+  /* Modular Spacing Scale (4px base unit) & Sticky Header Scroll Clearance */
   --genki-space-1: 0.25rem;
   --genki-space-2: 0.5rem;
   --genki-space-3: 0.75rem;
@@ -56,6 +62,7 @@
   --genki-space-10: 2.5rem;
   --genki-space-11: 2.75rem;
   --genki-space-12: 3rem;
+  --genki-scroll-offset: 6rem;
 
   /* Border Radii */
   --genki-radius-sm: 0.375rem;
@@ -76,7 +83,7 @@
     19,
     0.08
   );
-  --genki-focus-ring: 0 0 0 3px rgba(14, 124, 89, 0.24);
+  --genki-focus-ring: 0 0 0 3px rgba(13, 117, 84, 0.28);
   --genki-transition-fast: 160ms cubic-bezier(0.2, 0, 0, 1);
 }
 

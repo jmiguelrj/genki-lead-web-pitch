@@ -1,6 +1,6 @@
 // @genki-alias: [GENKI-SITE-MIGRATION-ISLAND]
 import { Badge, Card, TerminalGate } from '@genki-pitch/ui';
-import { useState } from 'react';
+import { type KeyboardEvent, useState } from 'react';
 import {
   type BlueprintViewConfig,
   type BlueprintViewId,
@@ -18,6 +18,25 @@ export function MigrationBlueprint() {
   if (!activeView) {
     return null;
   }
+
+  const handleTabKeyDown = (
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    const count = MIGRATION_VIEWS.length;
+    if (count === 0) return;
+    let nextIndex: number | null = null;
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % count;
+    else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + count) % count;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = count - 1;
+    if (nextIndex === null) return;
+    event.preventDefault();
+    const nextView = MIGRATION_VIEWS[nextIndex];
+    if (!nextView) return;
+    setActiveId(nextView.id);
+    document.getElementById(`blueprint-tab-${nextView.id}`)?.focus();
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -42,10 +61,12 @@ export function MigrationBlueprint() {
                 id={`blueprint-tab-${view.id}`}
                 type="button"
                 role="tab"
+                tabIndex={isActive ? 0 : -1}
                 aria-selected={isActive}
                 aria-controls={`blueprint-panel-${view.id}`}
                 className={btnClass}
                 onClick={() => setActiveId(view.id)}
+                onKeyDown={(event) => handleTabKeyDown(event, idx)}
               >
                 <span className={styles.tabMeta}>
                   0{idx + 1} · {view.tabShortMeta}
