@@ -24,7 +24,7 @@ export function Badge({
   return (
     <span className={composedClassName}>
       {dot ? <span className={styles.dot} aria-hidden="true" /> : null}
-      <span>{children}</span>
+      <span className={styles.label}>{children}</span>
     </span>
   );
 }

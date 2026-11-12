@@ -86,17 +86,17 @@ export function TerminalGate({
         {checks.map((check) => (
           <li key={check.id} className={styles.row}>
             <div className={styles.rowMain}>
-              <span
-                className={`${styles.rowStatus ?? ''} ${getRowStatusClass(check.status)}`}
-              >
-                {ROW_STATUS_TOKEN[check.status]}
-              </span>
-              <div className={styles.rowCopy}>
+              <div className={styles.rowHeader}>
+                <span
+                  className={`${styles.rowStatus ?? ''} ${getRowStatusClass(check.status)}`}
+                >
+                  {ROW_STATUS_TOKEN[check.status]}
+                </span>
                 <span className={styles.rowLabel}>{check.label}</span>
-                {check.detail ? (
-                  <span className={styles.rowDetail}>{check.detail}</span>
-                ) : null}
               </div>
+              {check.detail ? (
+                <p className={styles.rowDetail}>{check.detail}</p>
+              ) : null}
             </div>
             {check.meta ? (
               <span className={styles.rowMeta}>{check.meta}</span>

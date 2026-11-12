@@ -3,6 +3,8 @@
   display: inline-flex;
   align-items: center;
   gap: var(--genki-space-2);
+  max-width: 100%;
+  min-width: 0;
   padding: var(--genki-space-1) var(--genki-space-3);
   border-radius: var(--genki-radius-pill);
   border: 1px solid transparent;
@@ -21,6 +23,11 @@
   border-radius: var(--genki-radius-pill);
   background-color: currentColor;
   flex-shrink: 0;
+}
+
+.label {
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .neutral {
@@ -51,4 +58,12 @@
   background-color: var(--genki-status-block-bg);
   color: var(--genki-status-block);
   border-color: var(--genki-border-subtle);
+}
+
+@media (max-width: 640px) {
+  .badge {
+    white-space: normal;
+    line-height: 1.35;
+    height: auto;
+  }
 }

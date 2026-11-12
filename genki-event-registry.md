@@ -80,7 +80,16 @@ All tasks, pre-flight audits, architectural milestones, and deployments on `genk
 
 ## [2026-11-11 23:03:10 -03:00] Task #8: Redact Internal Server IP & Local User Paths from Public Docs
 
-- **Branch:** `chore/redact-infra-identifiers` -> merged `--no-ff` into `main`
+- **Branch:** `chore/redact-infra-identifiers` (`416ba85`) -> merged `--no-ff` into `main` (`0f04de2`)
 - **Summary:**
   1. Replaced raw production VPS host IP addresses with `<ops-vps-host>` and local OS user directory paths with `<user-home>` across `GENKI-SOP.md` and `genki-event-registry.md`.
-  2. Passed `pnpm check:all`, merged `--no-ff` into `main`, pushed to `origin/main`, synchronized `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`, and verified GitHub Actions CI run completion (`conclusion: "success"`).
+  2. Passed `pnpm check:all`, merged `--no-ff` into `main`, pushed to `origin/main`, synchronized `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`, and verified GitHub Actions CI run completion (`conclusion: "success"`, Run ID `43139118556`).
+
+## [2026-11-11 23:16:30 -03:00] Task #9: Mobile & Desktop Responsive UI Polish (`TerminalGate`, `Badge`, Sticky Header) & Live Cloudflare Redeployment
+
+- **Branch:** `fix/task-9-mobile-responsive-polish` -> merged `--no-ff` into `main`
+- **Summary:**
+  1. Fixed mobile responsive layout in `TerminalGate.tsx` & `TerminalGate.module.scss` (`< 720px` vertical row stack with full-width `.rowDetail`, `min-width: 0`, and `overflow-wrap: break-word` so text never compresses into a narrow column).
+  2. Updated `Badge.tsx`, `Badge.module.scss`, and `Card.module.scss` (`max-width: 100%`, `min-width: 0`, and `< 640px` multi-line wrapping with inline status dot) and added `overflow-x: clip` to `.page` and `.main`.
+  3. Redesigned `BaseLayout.astro` & `BaseLayout.module.scss` sticky header for single-row desktop (`>= 960px`) alignment and ultra-compact mobile (`< 768px`, `< 88px` height) layout with inline brand dot and single-line horizontal nav strip, plus paired currency codes (`THB\u00A0`, `EUR\u00A0`, `IDR\u00A0`) in `ClaimPreflightWidget`.
+  4. Verified `375px` and `1440px` DOM geometry, passed `pnpm check:all`, redeployed live to `https://genki-lead-web-pitch.pages.dev`, merged `--no-ff` into `main`, synced `root@<ops-vps-host>`, and confirmed green GitHub Actions CI.

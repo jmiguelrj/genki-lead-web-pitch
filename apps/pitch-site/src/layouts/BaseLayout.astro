@@ -29,22 +29,32 @@ const repoUrl = 'https://github.com/jmiguelrj/genki-lead-web-pitch';
   <body class={styles.page}>
     <header class={styles.header}>
       <nav class={styles.navInner} aria-label="Primary architecture navigation">
-        <div class={styles.brandGroup}>
-          <span class={styles.brandMark} aria-hidden="true"></span>
-          <a href="#" class={styles.brandTitle}>
-            Genki Lead Web Engineer — Architectural Pitch
-          </a>
-          <span class={styles.divider} aria-hidden="true">/</span>
-          <span class={styles.authorMeta}>João Miguel · Rio de Janeiro (UTC-3)</span>
+        <div class={styles.brandRow}>
+          <div class={styles.brandGroup}>
+            <a href="#" class={styles.brandLink}>
+              <span class={styles.brandMark} aria-hidden="true"></span>
+              <span class={styles.brandTitle}>Genki · Lead Web Pitch</span>
+            </a>
+            <span class={styles.authorPill}>João Miguel · UTC-3</span>
+          </div>
+          <div class={styles.mobileCta}>
+            <Button href={repoUrl} external variant="secondary" size="sm">
+              GitHub ↗
+            </Button>
+          </div>
         </div>
         <div class={styles.navActions}>
-          <a href="#blueprints" class={styles.navLink}>01 · Blueprints</a>
-          <a href="#agent-guardrails" class={styles.navLink}>02 · AI Guardrails</a>
-          <a href="#claim-preflight" class={styles.navLink}>03 · Claim OS UX</a>
-          <a href="#track-record" class={styles.navLink}>Track Record</a>
-          <Button href={repoUrl} external variant="secondary" size="sm">
-            GitHub Monorepo ↗
-          </Button>
+          <div class={styles.navLinks}>
+            <a href="#blueprints" class={styles.navLink}>01 · Blueprints</a>
+            <a href="#agent-guardrails" class={styles.navLink}>02 · AI Guardrails</a>
+            <a href="#claim-preflight" class={styles.navLink}>03 · Claim OS UX</a>
+            <a href="#track-record" class={styles.navLink}>Track Record</a>
+          </div>
+          <div class={styles.desktopCta}>
+            <Button href={repoUrl} external variant="secondary" size="sm">
+              GitHub ↗
+            </Button>
+          </div>
         </div>
       </nav>
     </header>
