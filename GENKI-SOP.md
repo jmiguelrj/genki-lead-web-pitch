@@ -12,7 +12,7 @@ Before executing development, audit, or deployment tasks on `genki-lead-web-pitc
   - Local Windows: `node -v` (`>= 24.0.0`, currently `v24.13.0`), `pnpm -v` (`>= 10.0.0`, currently `10.33.0`), `git --version` (`2.56.0.windows.2`).
   - Root Dev Toolchain: `@biomejs/biome` (`^2.6.7`), `typescript` (`^6.0.3`), `@types/node` (`^26.6.6`), and `@emnapi/*` / `@tybys/wasm-util` WASI peers.
   - `@genki-pitch/ui` (`packages/ui`): `react` (`^19.3.1`), `react-dom` (`^19.3.1`), `@types/react` (`^19.3.0`), `@types/react-dom` (`^19.3.0`), `sass-embedded` (`^1.108.2`).
-  - `@genki-pitch/site` (`apps/pitch-site`): `astro` (`^7.4.11`, `output: 'static'`), `@astrojs/react` (`^7.1.8`), `@astrojs/check` (`^0.9.12`), `@genki-pitch/ui` (`workspace:*`).
+  - `@genki-pitch/site` (`apps/pitch-site`): `astro` (`^7.4.11`, `output: 'static'`), `@astrojs/react` (`^7.1.8`), `@astrojs/check` (`^0.9.12`), `@genki-pitch/ui` (`workspace:*`), `wrangler` (`^4.160.1`).
   - Remote Hetzner VPS: `ssh -o BatchMode=yes -o ConnectTimeout=10 root@<ops-vps-host> "git --version && docker -v && df -h /"`.
 - **Clean Working Tree:** Verify `git status` is clean and synchronized with `origin/main` before branching (`git checkout -b feat/task-<n>-<slug>`).
 
@@ -41,7 +41,7 @@ Before executing development, audit, or deployment tasks on `genki-lead-web-pitc
    pnpm check:all
    ```
 
-   _(`pnpm check:all` executes `pnpm guardrails && pnpm lint && pnpm typecheck && pnpm build`, running `astro check && tsc --noEmit` and `astro build` across `@genki-pitch/site`.)_
+   _(`pnpm check:all` executes `pnpm guardrails && pnpm lint && pnpm typecheck && pnpm build && pnpm budget`, enforcing design tokens, XSS/type safety, Biome lint, `astro check && tsc --noEmit`, `astro build`, and `< 25 KB` island / `< 40 KB` CSS bundle ceilings across `@genki-pitch/site`.)_
 
 2. Log every task sequentially in `genki-event-registry.md` with its ISO timestamp, branch reference, and summary.
 

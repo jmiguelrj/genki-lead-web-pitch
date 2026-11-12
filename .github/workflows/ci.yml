@@ -1,0 +1,48 @@
+# @genki-alias: [GENKI-CI-WORKFLOW]
+name: Genki Architectural Guardrails & CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Guardrails, Lint, Typecheck, Build & Budget
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm (from root packageManager)
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js 24 with pnpm store cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "pnpm"
+
+      - name: Install workspace dependencies (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Gate 1 — AI Design Token & XSS/Type Guardrails
+        run: pnpm guardrails
+
+      - name: Gate 2 — Biome Static Analysis & Formatting
+        run: pnpm lint
+
+      - name: Gate 3 — Ultra-Strict TypeScript & Astro Diagnostics
+        run: pnpm typecheck
+
+      - name: Gate 4 — Production Static & Islands Build
+        run: pnpm build
+
+      - name: Gate 5 — Feature Island & CSS Bundle Budget
+        run: pnpm budget
