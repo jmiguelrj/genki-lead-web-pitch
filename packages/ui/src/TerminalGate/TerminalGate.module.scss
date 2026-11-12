@@ -47,15 +47,15 @@
 }
 
 .lightRed {
-  background-color: var(--genki-status-block);
+  background-color: var(--genki-terminal-block);
 }
 
 .lightAmber {
-  background-color: var(--genki-status-warn);
+  background-color: var(--genki-terminal-warn);
 }
 
 .lightGreen {
-  background-color: var(--genki-status-pass);
+  background-color: var(--genki-terminal-pass);
 }
 
 .command {
@@ -69,7 +69,7 @@
 }
 
 .prompt {
-  color: var(--genki-accent-primary);
+  color: var(--genki-terminal-accent);
   margin-right: var(--genki-space-2);
 }
 
@@ -121,15 +121,15 @@
 }
 
 .statusPass {
-  color: var(--genki-status-pass);
+  color: var(--genki-terminal-pass);
 }
 
 .statusWarn {
-  color: var(--genki-status-warn);
+  color: var(--genki-terminal-warn);
 }
 
 .statusBlock {
-  color: var(--genki-status-block);
+  color: var(--genki-terminal-block);
 }
 
 .rowLabel {

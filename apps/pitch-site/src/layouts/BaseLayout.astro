@@ -11,6 +11,7 @@ export interface Props {
 
 const { title, description } = Astro.props;
 const repoUrl = 'https://github.com/jmiguelrj/genki-lead-web-pitch';
+const canonicalUrl = 'https://genki-lead-web-pitch.pages.dev/';
 ---
 
 <!doctype html>
@@ -19,14 +20,17 @@ const repoUrl = 'https://github.com/jmiguelrj/genki-lead-web-pitch';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta name="theme-color" content="#0e7c59" />
+    <meta name="theme-color" content="#0d7554" />
   </head>
   <body class={styles.page}>
+    <a href="#main-content" class={styles.skipLink}>Skip to main content</a>
     <header class={styles.header}>
       <nav class={styles.navInner} aria-label="Primary architecture navigation">
         <div class={styles.brandRow}>
@@ -59,7 +63,7 @@ const repoUrl = 'https://github.com/jmiguelrj/genki-lead-web-pitch';
       </nav>
     </header>
 
-    <main class={styles.main}>
+    <main id="main-content" class={styles.main}>
       <slot />
     </main>
 

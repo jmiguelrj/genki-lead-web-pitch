@@ -1,6 +1,6 @@
 // @genki-alias: [GENKI-SITE-CLAIM-WIDGET-ISLAND]
 import { Badge, Card, TerminalGate } from '@genki-pitch/ui';
-import { useState } from 'react';
+import { type KeyboardEvent, useState } from 'react';
 import { CLAIM_SAMPLES } from './ClaimPreflightWidget.data';
 import styles from './ClaimPreflightWidget.module.scss';
 import type {
@@ -19,6 +19,25 @@ export function ClaimPreflightWidget() {
     return null;
   }
 
+  const handleTabKeyDown = (
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    const count = CLAIM_SAMPLES.length;
+    if (count === 0) return;
+    let nextIndex: number | null = null;
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % count;
+    else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + count) % count;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = count - 1;
+    if (nextIndex === null) return;
+    event.preventDefault();
+    const nextSample = CLAIM_SAMPLES[nextIndex];
+    if (!nextSample) return;
+    setActiveId(nextSample.id);
+    document.getElementById(`claim-tab-${nextSample.id}`)?.focus();
+  };
+
   return (
     <div className={styles.wrapper}>
       <div
@@ -26,7 +45,7 @@ export function ClaimPreflightWidget() {
         role="tablist"
         aria-label="Wave Claims deterministic invoice pre-flight samples"
       >
-        {CLAIM_SAMPLES.map((sample) => {
+        {CLAIM_SAMPLES.map((sample, idx) => {
           const isActive = sample.id === activeSample.id;
           const btnClass = [
             styles.sampleButton,
@@ -41,10 +60,12 @@ export function ClaimPreflightWidget() {
               id={`claim-tab-${sample.id}`}
               type="button"
               role="tab"
+              tabIndex={isActive ? 0 : -1}
               aria-selected={isActive}
               aria-controls={`claim-panel-${sample.id}`}
               className={btnClass}
               onClick={() => setActiveId(sample.id)}
+              onKeyDown={(event) => handleTabKeyDown(event, idx)}
             >
               <div className={styles.tabHeaderRow}>
                 <span className={styles.tabCode}>{sample.tabCode}</span>

@@ -35,7 +35,7 @@ The following paths are protected by `.github/CODEOWNERS` and must not be modifi
    - **Zero Tailwind CSS.** All component styling uses scoped SCSS Modules (`*.module.scss`).
    - **Zero Raw Color Literals:** Component `*.module.scss` files must never contain raw hex codes (`#fff`, `#0f172a`, etc.), `rgb(...)`, or `hsl(...)` functions. Every color, spacing, radius, and shadow value must reference semantic `var(--genki-*)` CSS custom properties defined in `@genki-pitch/ui`.
 
-3. **Astro 5 Zero-JS Default & Islands Architecture:**
+3. **Astro Zero-JS Default & Islands Architecture:**
    - Astro pages and layout sections ship **zero client-side JavaScript** by default.
    - Hydrate stateful React islands (`*.tsx`) exclusively with `client:visible` (never `client:only` or blanket `client:load` unless explicitly documented for above-the-fold interaction).
 
@@ -63,3 +63,4 @@ pnpm check:all
 2. `pnpm lint` (`biome check .`) — Verifies formatting, import sorting, `noExplicitAny`, and static lint rules.
 3. `pnpm typecheck` (`pnpm -r typecheck`) — Runs strict TypeScript & Astro type checking across all workspaces.
 4. `pnpm build` (`pnpm -r build`) — Confirms clean production builds across all packages and apps.
+5. `pnpm budget` (`node scripts/verify-bundle-budget.mjs`) — Enforces `< 25 KB` per React 19 feature island chunk and `< 40 KB` compiled CSS ceiling in `apps/pitch-site/dist/_astro/`.

@@ -84,7 +84,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--genki-space-5);
-  scroll-margin-top: var(--genki-space-12);
+  scroll-margin-top: var(--genki-scroll-offset);
 }
 
 .sectionHeader {
@@ -126,7 +126,7 @@
   gap: var(--genki-space-5);
   padding-top: var(--genki-space-4);
   border-top: 1px solid var(--genki-border-subtle);
-  scroll-margin-top: var(--genki-space-12);
+  scroll-margin-top: var(--genki-scroll-offset);
 }
 
 .trackGrid {
