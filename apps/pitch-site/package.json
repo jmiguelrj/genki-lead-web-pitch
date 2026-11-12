@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "typecheck": "astro check && tsc --noEmit",
-    "deploy": "wrangler pages deploy dist --project-name=genki-lead-web-pitch"
+    "deploy": "wrangler pages deploy dist --project-name=genki-lead-web-pitch --branch=main"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.8",
