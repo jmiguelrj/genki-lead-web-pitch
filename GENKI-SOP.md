@@ -8,9 +8,10 @@ Before executing development, audit, or deployment tasks on `genki-lead-web-pitc
 - **Local Workspace:** `C:\repos\genki` (`pnpm` workspace root covering `packages/*` and `apps/*`)
 - **Remote GitHub Origin:** `https://github.com/jmiguelrj/genki-lead-web-pitch.git` (`main` branch)
 - **Remote Operations Host:** `root@<ops-vps-host>:/opt/genki-lead-web-pitch`
-- **Tooling Verification:**
+- **Tooling & Workspace Dependencies:**
   - Local Windows: `node -v` (`>= 24.0.0`, currently `v24.13.0`), `pnpm -v` (`>= 10.0.0`, currently `10.33.0`), `git --version` (`2.56.0.windows.2`).
   - Root Dev Toolchain: `@biomejs/biome` (`^2.6.7`), `typescript` (`^7.0.2`), `@types/node` (`^26.6.6`).
+  - `@genki-pitch/ui` (`packages/ui`): `react` (`^19.3.1`), `react-dom` (`^19.3.1`), `@types/react` (`^19.3.0`), `@types/react-dom` (`^19.3.0`), `sass-embedded` (`^1.108.2`).
   - Remote Hetzner VPS: `ssh -o BatchMode=yes -o ConnectTimeout=10 root@<ops-vps-host> "git --version && docker -v && df -h /"`.
   - GitHub MCP Server (`github-mcp-server`): Verify active token in `<user-home>\.gemini\config\mcp_config.json` and `<user-home>\.gemini\antigravity-ide\mcp_config.json` before invoking repository operations.
 - **Clean Working Tree:** Verify `git status` is clean and synchronized with `origin/main` before branching (`git checkout -b feat/task-<n>-<slug>`).
@@ -19,29 +20,28 @@ Before executing development, audit, or deployment tasks on `genki-lead-web-pitc
 
 ## 2. Execution Steps
 
-### 2.1 AI-Guardrail Modular Architecture & Ownership Boundaries
+### 2.1 AI-Guardrail Modular Architecture & Shared Design System
 
 1. **Tech Stack & Workspace Layout:**
-   - **Workspaces (`pnpm-workspace.yaml`):** `packages/*` (shared `@genki-pitch/ui` primitives & design tokens) and `apps/*` (`apps/pitch-site` Astro 5 application).
-   - **Framework:** Astro 5 (Zero-JS default + `client:visible` React Islands) + React + Ultra-Strict TypeScript (`tsconfig.base.json`) + Vite + SCSS Modules (`*.module.scss`).
+   - **`packages/ui` (`@genki-pitch/ui`):** Exports single-source-of-truth semantic tokens (`@genki-pitch/ui/tokens.scss`) and strictly typed React 19 primitives (`Badge`, `Button`, `Card`, `TerminalGate`) from `packages/ui/src/index.ts`.
+   - **`apps/*` (`apps/pitch-site`):** Astro 5 application (Zero-JS default + `client:visible` React Islands) consuming `@genki-pitch/ui`.
 2. **Governance & Role Boundaries (`CLAUDE.md` & `.github/CODEOWNERS`):**
    - Non-engineers and AI agents compose pages inside `apps/pitch-site/src/pages/` using `@genki-pitch/ui` components.
    - Core infrastructure (`/packages/ui/`, `/scripts/`, `/CLAUDE.md`, `/tsconfig.base.json`, `/.github/`) is protected by `.github/CODEOWNERS` (`@jmiguelrj`).
 3. **Token, Type, XSS & Line-Count Enforcement:**
-   - **Design Tokens Only:** Zero Tailwind CSS, zero raw hex codes (`#...`), and zero `rgb()`/`hsl()` literals in `*.module.scss`; bind exclusively to `var(--genki-*)`.
-   - **Type & XSS Safety:** Zero `: any`, `@ts-ignore`, `@ts-expect-error`, `dangerouslySetInnerHTML`, or `set:html` across `.ts`, `.tsx`, and `.astro`.
+   - **Single Source of Truth Tokens:** Raw color primitives are permitted ONLY in `packages/ui/src/tokens/tokens.scss` (`:root` `--genki-*` variables). Every `*.module.scss` file must bind exclusively to `var(--genki-*)` with zero hex codes (`#...`) and zero `rgb()`/`hsl()` literals.
+   - **Type & XSS Safety:** Zero `: any`, `@ts-ignore`, `@ts-expect-error`, `dangerouslySetInnerHTML`, or `set:html` across `.ts`, `.tsx`, and `.astro`. All optional props must comply with `exactOptionalPropertyTypes: true` and `noUncheckedIndexedAccess: true`.
    - **Modularity & Headers:** Keep every tracked file strictly `< 250` lines (`wc -l`), normalized to Unix LF (`\n`), with `@genki-alias: [GENKI-*]` on line 1 of governance and architectural files.
 
-### 2.2 Mandatory Pre-Merge Verification Suite
+### 2.2 Mandatory Pre-Merge Verification Suite (`pnpm check:all`)
 
-1. Run the deterministic verification suite from `C:\repos\genki` before committing or merging:
+1. Run the full deterministic verification suite from `C:\repos\genki` before committing or merging:
 
    ```powershell
-   pnpm guardrails
-   pnpm lint
+   pnpm check:all
    ```
 
-   _(Once workspace packages/apps are populated in Tasks #3+, execute the full `pnpm check:all` pipeline: `pnpm guardrails && pnpm lint && pnpm typecheck && pnpm build`.)_
+   _(`pnpm check:all` runs `pnpm guardrails && pnpm lint && pnpm typecheck && pnpm build`.)_
 
 2. Log every task sequentially in `genki-event-registry.md` with its ISO timestamp, branch reference, and summary.
 
@@ -58,10 +58,10 @@ Before executing development, audit, or deployment tasks on `genki-lead-web-pitc
 
 ## 3. Expected Output
 
-1. **AI Guardrail Engine (`pnpm guardrails`):** Prints the verification table reporting `0` violations for Rule 1 (`*.module.scss` token enforcement) and Rule 2 (`.ts`/`.tsx`/`.astro` type & XSS safety), exiting with code `0`.
+1. **AI Guardrail Engine (`pnpm guardrails`):** Scans all `*.module.scss` and `.ts`/`.tsx`/`.astro` files across `packages/` and `apps/`, reporting `0` violations and exiting with code `0`.
 2. **Biome Linter & Formatter (`pnpm lint`):** `biome check .` exits with code `0` (`0` errors, `2`-space indent, single quotes, organized imports, `noExplicitAny: "error"`).
-3. **Type-Safety & Build Gates (`pnpm typecheck && pnpm build`):** Zero TypeScript compiler errors (`strict`, `noUncheckedIndexedAccess`, `noImplicitOverride`, `exactOptionalPropertyTypes`), zero SCSS module errors, and zero files `>= 250` lines.
-4. **Git & Remote VPS Parity:** `git status` reports a clean working tree on `main` tracking `origin/main`, and `ssh root@<ops-vps-host> "cd /opt/genki-lead-web-pitch && git log --oneline -n 4"` matches local `git log --oneline -n 4`.
+3. **Type-Safety & Build Gates (`pnpm typecheck && pnpm build`):** Zero TypeScript compiler errors across `@genki-pitch/ui` and workspace apps, zero SCSS module errors, and zero files `>= 250` lines.
+4. **Git & Remote VPS Parity:** `git status` reports a clean working tree on `main` tracking `origin/main`, and `ssh root@<ops-vps-host> "cd /opt/genki-lead-web-pitch && git log --oneline -n 5"` matches local `git log --oneline -n 5`.
 
 ---
 
@@ -72,7 +72,7 @@ If any verification gate fails during execution, execute the applicable rollback
 - **Feature Branch Rollback (Local Workspace):**
 
   ```powershell
-  git checkout main && git branch -D <feature-branch> && git reset --hard origin/main
+  git checkout main && git branch -D <feature-branch> && git reset --hard origin/main && pnpm install
   ```
 
 - **Commit Rollback on `main` (Local + Remote VPS):**
