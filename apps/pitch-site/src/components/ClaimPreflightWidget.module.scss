@@ -1,0 +1,190 @@
+// @genki-alias: [GENKI-SITE-CLAIM-WIDGET-STYLE]
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--genki-space-6);
+  padding: var(--genki-space-6);
+  background-color: var(--genki-bg-surface);
+  border: 1px solid var(--genki-border-subtle);
+  border-radius: var(--genki-radius-lg);
+  box-shadow: var(--genki-shadow-card);
+}
+
+.sampleTabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--genki-space-2);
+  padding: var(--genki-space-2);
+  background-color: var(--genki-bg-subtle);
+  border: 1px solid var(--genki-border-subtle);
+  border-radius: var(--genki-radius-md);
+}
+
+.sampleButton {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--genki-space-2);
+  padding: var(--genki-space-3) var(--genki-space-4);
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--genki-radius-sm);
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--genki-font-sans);
+  color: var(--genki-text-secondary);
+  min-width: 0;
+  transition:
+    background-color var(--genki-transition-fast),
+    border-color var(--genki-transition-fast),
+    color var(--genki-transition-fast),
+    box-shadow var(--genki-transition-fast);
+
+  &:hover {
+    color: var(--genki-text-primary);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--genki-focus-ring);
+  }
+}
+
+.sampleButtonActive {
+  background-color: var(--genki-bg-surface);
+  border-color: var(--genki-border-strong);
+  color: var(--genki-text-primary);
+  box-shadow: var(--genki-shadow-card);
+}
+
+.tabHeaderRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--genki-space-2);
+  flex-wrap: wrap;
+}
+
+.tabCode {
+  font-family: var(--genki-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--genki-accent-primary);
+}
+
+.tabTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--genki-space-5);
+}
+
+.splitGrid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: var(--genki-space-4);
+}
+
+.metaList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--genki-space-2);
+  margin-bottom: var(--genki-space-4);
+  padding-bottom: var(--genki-space-3);
+  border-bottom: 1px solid var(--genki-border-subtle);
+  font-size: 0.84375rem;
+}
+
+.metaPair {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--genki-space-3);
+  flex-wrap: wrap;
+}
+
+.metaKey {
+  color: var(--genki-text-muted);
+  font-family: var(--genki-font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.metaVal {
+  font-weight: 600;
+  color: var(--genki-text-primary);
+}
+
+.lineTable {
+  display: flex;
+  flex-direction: column;
+  gap: var(--genki-space-2);
+}
+
+.lineRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--genki-space-3);
+  padding: var(--genki-space-3);
+  background-color: var(--genki-bg-canvas);
+  border: 1px solid var(--genki-border-subtle);
+  border-radius: var(--genki-radius-sm);
+  flex-wrap: wrap;
+}
+
+.lineDesc {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--genki-text-primary);
+}
+
+.lineAmounts {
+  display: flex;
+  align-items: center;
+  gap: var(--genki-space-3);
+  font-family: var(--genki-font-mono);
+  font-size: 0.78125rem;
+  flex-wrap: wrap;
+}
+
+.eurTag {
+  color: var(--genki-accent-primary);
+  font-weight: 600;
+}
+
+.guidanceCopy {
+  margin: 0 0 var(--genki-space-4);
+}
+
+.actionCallout {
+  padding: var(--genki-space-3) var(--genki-space-4);
+  background-color: var(--genki-bg-subtle);
+  border-left: 3px solid var(--genki-accent-primary);
+  border-radius: var(--genki-radius-sm);
+  font-family: var(--genki-font-mono);
+  font-size: 0.78125rem;
+  font-weight: 600;
+  color: var(--genki-text-primary);
+}
+
+@media (max-width: 960px) {
+  .sampleTabs,
+  .splitGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    padding: var(--genki-space-4);
+  }
+}

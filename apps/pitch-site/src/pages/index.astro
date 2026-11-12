@@ -1,7 +1,9 @@
 ---
 // @genki-alias: [GENKI-SITE-INDEX-PAGE]
 import { Badge, Button, Card } from '@genki-pitch/ui';
+import { ClaimPreflightWidget } from '../components/ClaimPreflightWidget';
 import { MigrationBlueprint } from '../components/MigrationBlueprint';
+import { SafeAgentSimulator } from '../components/SafeAgentSimulator';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import styles from './index.module.scss';
 
@@ -61,7 +63,7 @@ const repoUrl = 'https://github.com/jmiguelrj/genki-lead-web-pitch';
     <!-- Section 01: Interactive Module #1 -->
     <section id="blueprints" class={styles.section} aria-labelledby="section-01-heading">
       <div class={styles.sectionHeader}>
-        <span class={styles.sectionKicker}>Section 01 · Interactive Architecture Module</span>
+        <span class={styles.sectionKicker}>01 · Web Consolidation &amp; Migration</span>
         <h2 id="section-01-heading" class={styles.sectionTitle}>
           Consolidating Organic Web Sprawl into Astro + React Router
         </h2>
@@ -73,39 +75,37 @@ const repoUrl = 'https://github.com/jmiguelrj/genki-lead-web-pitch';
       <MigrationBlueprint client:visible />
     </section>
 
-    <!-- Structural Slots for Section 02 & Section 03 (Task #5) -->
-    <div class={styles.placeholderGrid}>
-      <section
-        id="agent-guardrails"
-        class={styles.placeholderSlot}
-        aria-labelledby="section-02-heading"
-      >
-        <Badge variant="neutral" dot>Section 02 · Interactive Module Slot</Badge>
+    <!-- Section 02: Interactive Module #2 -->
+    <section id="agent-guardrails" class={styles.section} aria-labelledby="section-02-heading">
+      <div class={styles.sectionHeader}>
+        <span class={styles.sectionKicker}>02 · Enabling Non-Engineers</span>
         <h2 id="section-02-heading" class={styles.sectionTitle}>
-          Safe AI-Agentic Contribution Simulator
+          Safe AI-Agentic Contribution Simulator (CLAUDE.md + CODEOWNERS)
         </h2>
-        <p class={styles.placeholderCopy}>
-          Structural slot reserved for <code>SafeAgentSimulator</code>—demonstrating how
-          <code>CLAUDE.md</code>, <code>CODEOWNERS</code>, and <code>verify-guardrails.mjs</code>
-          let non-engineers ship pages autonomously while blocking token drift and unsafe markup.
+        <p class={styles.sectionLead}>
+          Simulate how Marketing, Operations, and Design ship changes using Claude Code while
+          deterministic guardrails block raw hex drift, reject unsafe DOM injection, and escalate
+          core design-token edits to Lead Web Engineer review.
         </p>
-      </section>
+      </div>
+      <SafeAgentSimulator client:visible />
+    </section>
 
-      <section
-        id="claim-preflight"
-        class={styles.placeholderSlot}
-        aria-labelledby="section-03-heading"
-      >
-        <Badge variant="neutral" dot>Section 03 · Interactive Module Slot</Badge>
+    <!-- Section 03: Interactive Module #3 -->
+    <section id="claim-preflight" class={styles.section} aria-labelledby="section-03-heading">
+      <div class={styles.sectionHeader}>
+        <span class={styles.sectionKicker}>03 · Product Synergy: Claim OS UX</span>
         <h2 id="section-03-heading" class={styles.sectionTitle}>
           Wave Claims Deterministic Pre-Flight Widget
         </h2>
-        <p class={styles.placeholderCopy}>
-          Structural slot reserved for <code>ClaimPreflightWidget</code>—showcasing client-side
-          invoice line-item math verification and coverage validation before Claim OS submission.
+        <p class={styles.sectionLead}>
+          Combining Genki&apos;s Wave Claims philosophy—helping members know at the moment of
+          filing exactly what their claim needs—with deterministic line-item math and currency
+          verification inspired by IntelliBill.
         </p>
-      </section>
-    </div>
+      </div>
+      <ClaimPreflightWidget client:visible />
+    </section>
 
     <!-- Footer: Execution Track Record (Zero-JS Astro using @genki-pitch/ui Card) -->
     <footer id="track-record" class={styles.footerSection} aria-labelledby="track-record-heading">

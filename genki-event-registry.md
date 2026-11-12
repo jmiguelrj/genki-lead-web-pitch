@@ -44,9 +44,18 @@ All tasks, pre-flight audits, architectural milestones, and deployments on `genk
 
 ## [2026-11-11 21:22:54 -03:00] Task #4: Scaffold `apps/pitch-site` (Astro + Vite + React 19 Islands) & Build Interactive Module #1 (`MigrationBlueprint.tsx`)
 
-- **Branch:** `feat/task-4-astro-shell-migration-island` -> merged `--no-ff` into `main`
+- **Branch:** `feat/task-4-astro-shell-migration-island` (`d56fb19`) -> merged `--no-ff` into `main` (`3090db5`)
 - **Summary:**
   1. Scaffolded `apps/pitch-site` (`@genki-pitch/site@0.1.0`) linked to `@genki-pitch/ui` (`workspace:*`) with `astro` (`^7.4.11`), `@astrojs/react` (`^7.1.8`), `@astrojs/check` (`^0.9.12`), `react` (`^19.3.1`), `sass-embedded`, and `typescript` (`^6.0.3`), configured `astro.config.mjs` (`output: 'static'`, `vite.ssr.noExternal: ['@genki-pitch/ui']`), and removed placeholder `apps/.gitkeep`.
   2. Built the zero-JS editorial shell (`BaseLayout.astro` + `BaseLayout.module.scss` and `index.astro` + `index.module.scss`) featuring global `@genki-pitch/ui/tokens.scss` import, sticky header navigation, Hero section (`"Systems over screens. Guardrails for speed."` + 4 architectural metric callouts), structural slots for Sections 02 & 03, and the 3-column Execution Track Record footer.
   3. Built Interactive React 19 Island #1 (`MigrationBlueprint.tsx`, `MigrationBlueprint.data.ts`, `MigrationBlueprint.module.scss`) hydrated via `client:visible`, enabling live switching across _Legacy Next.js Sprawl_, _Unified Astro + React Router Monorepo_, and _Zero-Downtime Strangler Plan_ using shared `@genki-pitch/ui` `Card`, `Badge`, and `TerminalGate` components.
   4. Verified `pnpm check:all` (`0` guardrail violations across 7 `*.module.scss` and 13 `.ts`/`.tsx`/`.astro` files, `0` Biome lint errors, `0` `astro check` / `tsc` diagnostics, and clean static bundle emission into `apps/pitch-site/dist`), merged `--no-ff` into `main`, pushed to `origin/main`, and synced `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`.
+
+## [2026-11-11 21:47:30 -03:00] Task #5: Build Interactive React Islands #2 (`SafeAgentSimulator`) & #3 (`ClaimPreflightWidget`) and Wire into `index.astro`
+
+- **Branch:** `feat/task-5-agent-and-claims-islands` -> merged `--no-ff` into `main`
+- **Summary:**
+  1. Built Interactive React 19 Island #2 (`SafeAgentSimulator.tsx`, `SafeAgentSimulator.types.ts`, `SafeAgentSimulator.data.ts`, `SafeAgentSimulator.escalation.ts`, `SafeAgentSimulator.module.scss`) simulating 3 real-world non-engineer AI prompts against `CLAUDE.md`, `.github/CODEOWNERS`, and `scripts/verify-guardrails.mjs` with live `TerminalGate` verification and remediation guidance.
+  2. Built Interactive React 19 Island #3 (`ClaimPreflightWidget.tsx`, `ClaimPreflightWidget.types.ts`, `ClaimPreflightWidget.data.ts`, `ClaimPreflightWidget.bali.ts`, `ClaimPreflightWidget.module.scss`) showcasing a 3-sample interactive medical claim pre-flight intake widget (`Genki Traveler` vs. `Genki Native`), interactive receipt checklist toggles, deterministic confidence scoring (`0%–98%`), and real-time adjudication status (`Auto-Adjudication Ready` vs. `Missing Documentation`).
+  3. Wired `<SafeAgentSimulator client:visible />` (Section 02: `#agent-guardrails`) and `<ClaimPreflightWidget client:visible />` (Section 03: `#claim-preflight`) into `apps/pitch-site/src/pages/index.astro`, replacing the Task #4 placeholders and removing unused placeholder styles from `index.module.scss`.
+  4. Verified all files stay strictly `< 200` lines across the new islands (`< 250` lines repo-wide), passed `pnpm check:all` (`0` guardrail violations across 9 `*.module.scss` and 21 `.ts`/`.tsx`/`.astro` files, `0` Biome lint errors, `0` `astro check`/`tsc` diagnostics, and clean static bundle output in `apps/pitch-site/dist/_astro/`), merged `--no-ff` into `main`, pushed to `origin/main`, and synced `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`.

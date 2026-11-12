@@ -1,0 +1,183 @@
+// @genki-alias: [GENKI-SITE-AGENT-SIM-STYLE]
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--genki-space-6);
+  padding: var(--genki-space-6);
+  background-color: var(--genki-bg-surface);
+  border: 1px solid var(--genki-border-subtle);
+  border-radius: var(--genki-radius-lg);
+  box-shadow: var(--genki-shadow-card);
+}
+
+.scenarioTabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--genki-space-2);
+  padding: var(--genki-space-2);
+  background-color: var(--genki-bg-subtle);
+  border: 1px solid var(--genki-border-subtle);
+  border-radius: var(--genki-radius-md);
+}
+
+.scenarioButton {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--genki-space-2);
+  padding: var(--genki-space-3) var(--genki-space-4);
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--genki-radius-sm);
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--genki-font-sans);
+  color: var(--genki-text-secondary);
+  min-width: 0;
+  transition:
+    background-color var(--genki-transition-fast),
+    border-color var(--genki-transition-fast),
+    color var(--genki-transition-fast),
+    box-shadow var(--genki-transition-fast);
+
+  &:hover {
+    color: var(--genki-text-primary);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--genki-focus-ring);
+  }
+}
+
+.scenarioButtonActive {
+  background-color: var(--genki-bg-surface);
+  border-color: var(--genki-border-strong);
+  color: var(--genki-text-primary);
+  box-shadow: var(--genki-shadow-card);
+}
+
+.tabHeaderRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--genki-space-2);
+  flex-wrap: wrap;
+}
+
+.tabCode {
+  font-family: var(--genki-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--genki-accent-primary);
+}
+
+.tabTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--genki-space-5);
+}
+
+.metaBanner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--genki-space-3);
+  padding: var(--genki-space-5);
+  background-color: var(--genki-bg-canvas);
+  border: 1px solid var(--genki-border-subtle);
+  border-radius: var(--genki-radius-md);
+}
+
+.metaTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--genki-space-3);
+  flex-wrap: wrap;
+}
+
+.actorLabel {
+  font-family: var(--genki-font-mono);
+  font-size: 0.78125rem;
+  font-weight: 600;
+  color: var(--genki-text-secondary);
+}
+
+.targetPath {
+  font-family: var(--genki-font-mono);
+  font-size: 0.78125rem;
+  padding: var(--genki-space-1) var(--genki-space-3);
+  background-color: var(--genki-bg-surface);
+  border: 1px solid var(--genki-border-subtle);
+  border-radius: var(--genki-radius-sm);
+  color: var(--genki-accent-primary);
+  overflow-wrap: anywhere;
+}
+
+.headline {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--genki-text-primary);
+}
+
+.summary {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--genki-text-secondary);
+  line-height: 1.6;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--genki-space-4);
+}
+
+.cardDetail {
+  margin: 0 0 var(--genki-space-3);
+}
+
+.codeBlock {
+  margin: 0;
+  padding: var(--genki-space-3);
+  background-color: var(--genki-bg-terminal);
+  color: var(--genki-text-terminal);
+  border: 1px solid var(--genki-border-terminal);
+  border-radius: var(--genki-radius-sm);
+  font-family: var(--genki-font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 960px) {
+  .scenarioTabs,
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    padding: var(--genki-space-4);
+  }
+
+  .metaBanner {
+    padding: var(--genki-space-4);
+  }
+}
