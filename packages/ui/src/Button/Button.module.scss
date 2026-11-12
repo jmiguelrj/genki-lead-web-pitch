@@ -1,0 +1,82 @@
+// @genki-alias: [GENKI-UI-BUTTON-STYLE]
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--genki-space-2);
+  padding: var(--genki-space-3) var(--genki-space-5);
+  border-radius: var(--genki-radius-md);
+  border: 1px solid transparent;
+  font-family: var(--genki-font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--genki-transition-fast),
+    border-color var(--genki-transition-fast),
+    color var(--genki-transition-fast),
+    box-shadow var(--genki-transition-fast),
+    transform var(--genki-transition-fast);
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--genki-focus-ring);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.sm {
+  padding: var(--genki-space-2) var(--genki-space-3);
+  font-size: 0.8125rem;
+  border-radius: var(--genki-radius-sm);
+}
+
+.md {
+  padding: var(--genki-space-3) var(--genki-space-5);
+  font-size: 0.9375rem;
+}
+
+.lg {
+  padding: var(--genki-space-4) var(--genki-space-6);
+  font-size: 1rem;
+}
+
+.primary {
+  background-color: var(--genki-accent-primary);
+  color: var(--genki-text-on-accent);
+  border-color: var(--genki-accent-primary);
+
+  &:hover:not(:disabled) {
+    background-color: var(--genki-accent-hover);
+    border-color: var(--genki-accent-hover);
+  }
+}
+
+.secondary {
+  background-color: var(--genki-bg-surface);
+  color: var(--genki-text-primary);
+  border-color: var(--genki-border-strong);
+
+  &:hover:not(:disabled) {
+    background-color: var(--genki-bg-subtle);
+    border-color: var(--genki-accent-primary);
+  }
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--genki-text-secondary);
+  border-color: transparent;
+
+  &:hover:not(:disabled) {
+    background-color: var(--genki-bg-subtle);
+    color: var(--genki-text-primary);
+  }
+}

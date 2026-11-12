@@ -1,0 +1,59 @@
+// @genki-alias: [GENKI-UI-CARD-STYLE]
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--genki-space-4);
+  padding: var(--genki-space-6);
+  background-color: var(--genki-bg-surface);
+  border: 1px solid var(--genki-border-subtle);
+  border-radius: var(--genki-radius-lg);
+  box-shadow: var(--genki-shadow-card);
+  transition:
+    border-color var(--genki-transition-fast),
+    box-shadow var(--genki-transition-fast);
+}
+
+.elevated {
+  background-color: var(--genki-bg-elevated);
+  border-color: var(--genki-border-strong);
+  box-shadow: var(--genki-shadow-elevated);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--genki-space-2);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--genki-space-3);
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  font-family: var(--genki-font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--genki-accent-primary);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--genki-font-sans);
+  font-size: 1.25rem;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--genki-text-primary);
+}
+
+.body {
+  color: var(--genki-text-secondary);
+  font-size: 0.96875rem;
+  line-height: 1.65;
+}

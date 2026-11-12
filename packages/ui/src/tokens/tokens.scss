@@ -1,0 +1,103 @@
+// @genki-alias: [GENKI-UI-TOKENS]
+// Single Source of Truth Design Tokens for Genki (`@genki-pitch/ui`).
+// All component `*.module.scss` stylesheets MUST consume `var(--genki-*)` tokens exclusively.
+
+:root {
+  /* Editorial Off-White Surfaces & Dark Terminal */
+  --genki-bg-canvas: #f8f9f7;
+  --genki-bg-surface: #ffffff;
+  --genki-bg-elevated: #ffffff;
+  --genki-bg-subtle: #f1f4f0;
+  --genki-bg-terminal: #0c1310;
+  --genki-bg-terminal-row: #121c18;
+
+  /* Editorial & Terminal Typography Colors */
+  --genki-text-primary: #0f1713;
+  --genki-text-secondary: #3f4d45;
+  --genki-text-muted: #697870;
+  --genki-text-on-accent: #ffffff;
+  --genki-text-terminal: #e4ede8;
+  --genki-text-terminal-muted: #8ba195;
+
+  /* Botanical Emerald Brand Accents */
+  --genki-accent-primary: #0e7c59;
+  --genki-accent-hover: #0a6347;
+  --genki-accent-soft: #e6f4ef;
+
+  /* Deterministic Guardrail Status Palette */
+  --genki-status-pass: #0f7b55;
+  --genki-status-pass-bg: #e6f5ef;
+  --genki-status-warn: #b45309;
+  --genki-status-warn-bg: #fef3c7;
+  --genki-status-block: #be123c;
+  --genki-status-block-bg: #ffe4e6;
+
+  /* Borders & Hairlines */
+  --genki-border-subtle: #e2e8e4;
+  --genki-border-strong: #c5d1c9;
+  --genki-border-accent: #86ceb4;
+  --genki-border-terminal: #1f3029;
+
+  /* Font Stacks */
+  --genki-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto,
+  sans-serif;
+  --genki-font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  /* Modular Spacing Scale (4px base unit) */
+  --genki-space-1: 0.25rem;
+  --genki-space-2: 0.5rem;
+  --genki-space-3: 0.75rem;
+  --genki-space-4: 1rem;
+  --genki-space-5: 1.25rem;
+  --genki-space-6: 1.5rem;
+  --genki-space-7: 1.75rem;
+  --genki-space-8: 2rem;
+  --genki-space-9: 2.25rem;
+  --genki-space-10: 2.5rem;
+  --genki-space-11: 2.75rem;
+  --genki-space-12: 3rem;
+
+  /* Border Radii */
+  --genki-radius-sm: 0.375rem;
+  --genki-radius-md: 0.625rem;
+  --genki-radius-lg: 1rem;
+  --genki-radius-pill: 9999px;
+
+  /* Elevation Shadows & Interactive Focus Ring */
+  --genki-shadow-card: 0 1px 3px rgba(15, 23, 19, 0.04), 0 6px 16px rgba(
+    15,
+    23,
+    19,
+    0.04
+  );
+  --genki-shadow-elevated: 0 4px 12px rgba(15, 23, 19, 0.06), 0 20px 40px rgba(
+    15,
+    23,
+    19,
+    0.08
+  );
+  --genki-focus-ring: 0 0 0 3px rgba(14, 124, 89, 0.24);
+  --genki-transition-fast: 160ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--genki-font-sans);
+  background-color: var(--genki-bg-canvas);
+  color: var(--genki-text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

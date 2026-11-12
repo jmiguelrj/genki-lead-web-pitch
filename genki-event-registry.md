@@ -26,9 +26,18 @@ All tasks, pre-flight audits, architectural milestones, and deployments on `genk
 
 ## [2026-11-11 21:04:42 -03:00] Task #2: Initialize Monorepo Workspace, Strict TypeScript Base, Biome & Automated AI Guardrails (`CLAUDE.md`)
 
-- **Branch:** `feat/task-2-monorepo-guardrails` -> merged `--no-ff` into `main`
+- **Branch:** `feat/task-2-monorepo-guardrails` (`1eeec23`) -> merged `--no-ff` into `main` (`2d7ec59`)
 - **Summary:**
   1. Configured monorepo root workspace files: `.gitignore`, `pnpm-workspace.yaml` (`packages/*`, `apps/*`), `package.json` (`pnpm@10.33.0`, Node `>=24.0.0`, `build`, `typecheck`, `lint`, `guardrails`, and `check:all` scripts), and installed `@biomejs/biome`, `typescript`, and `@types/node`.
   2. Configured `biome.json` (2-space indent, single quotes, LF line endings, import sorting, `noExplicitAny: "error"`, `noDangerouslySetInnerHtml: "error"`, and Astro frontmatter overrides) and `tsconfig.base.json` (`strict`, `noUncheckedIndexedAccess`, `noImplicitOverride`, `exactOptionalPropertyTypes`, `moduleResolution: "bundler"`, `target: "ES2022"`).
   3. Authored `CLAUDE.md` defining AI-agentic role boundaries and strict stack rules, `.github/CODEOWNERS` protecting `/packages/ui/`, `/scripts/`, `/CLAUDE.md`, `/tsconfig.base.json`, and `/.github/` under `@jmiguelrj`, and placeholder directories `packages/.gitkeep` and `apps/.gitkeep`.
   4. Implemented `scripts/verify-guardrails.mjs` enforcing Rule 1 (zero raw hex/`rgb()`/`hsl()` colors in `*.module.scss`) and Rule 2 (zero `dangerouslySetInnerHTML`, `set:html`, `@ts-ignore`, `@ts-expect-error`, or `: any` in `.ts`, `.tsx`, `.astro`), verified `pnpm guardrails` and `pnpm lint`, merged `--no-ff` to `main`, pushed to `origin/main`, and synced `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`.
+
+## [2026-11-11 21:12:35 -03:00] Task #3: Build Shared Design System & Component Library (`packages/ui` — React 19 + TypeScript + SCSS Modules)
+
+- **Branch:** `feat/task-3-shared-ui-library` -> merged `--no-ff` into `main`
+- **Summary:**
+  1. Scaffolded `packages/ui` (`@genki-pitch/ui@0.1.0`) with package exports (`.` and `./tokens.scss`), `tsconfig.json` extending `../../tsconfig.base.json`, `src/css-modules.d.ts`, and installed `react` (`^19.3.1`), `react-dom` (`^19.3.1`), `@types/react`, `@types/react-dom`, and `sass-embedded`; removed placeholder `packages/.gitkeep`.
+  2. Authored `packages/ui/src/tokens/tokens.scss` establishing the single-source-of-truth `:root` CSS Custom Properties (`--genki-*`) across editorial off-white surfaces, botanical emerald accents, status colors, font stacks, 4px modular spacing scale, radii, shadows, and base resets.
+  3. Built 4 reusable, strictly typed React 19 components bound exclusively to `var(--genki-*)` SCSS Modules (`exactOptionalPropertyTypes: true`, `noUncheckedIndexedAccess: true`): `Badge` (`neutral | emerald | pass | warn | block`), `Card` (`eyebrow`, `title`, `badge`, `elevated`), `Button` (`primary | secondary | ghost` with polymorphic button/anchor semantics), and `TerminalGate` (dark-mode CI/guardrail verification readout card), exported from `packages/ui/src/index.ts`.
+  4. Passed `pnpm check:all` (`pnpm guardrails` scanning 4 `*.module.scss` and 6 `.ts`/`.tsx` files with `0` violations, `pnpm lint`, `pnpm typecheck`, and `pnpm build`), merged `--no-ff` into `main`, pushed to `origin/main`, and synchronized `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`.

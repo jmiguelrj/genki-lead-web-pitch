@@ -1,0 +1,54 @@
+// @genki-alias: [GENKI-UI-BADGE-STYLE]
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--genki-space-2);
+  padding: var(--genki-space-1) var(--genki-space-3);
+  border-radius: var(--genki-radius-pill);
+  border: 1px solid transparent;
+  font-family: var(--genki-font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: var(--genki-radius-pill);
+  background-color: currentColor;
+  flex-shrink: 0;
+}
+
+.neutral {
+  background-color: var(--genki-bg-subtle);
+  color: var(--genki-text-secondary);
+  border-color: var(--genki-border-subtle);
+}
+
+.emerald {
+  background-color: var(--genki-accent-soft);
+  color: var(--genki-accent-primary);
+  border-color: var(--genki-border-accent);
+}
+
+.pass {
+  background-color: var(--genki-status-pass-bg);
+  color: var(--genki-status-pass);
+  border-color: var(--genki-border-accent);
+}
+
+.warn {
+  background-color: var(--genki-status-warn-bg);
+  color: var(--genki-status-warn);
+  border-color: var(--genki-border-subtle);
+}
+
+.block {
+  background-color: var(--genki-status-block-bg);
+  color: var(--genki-status-block);
+  border-color: var(--genki-border-subtle);
+}
