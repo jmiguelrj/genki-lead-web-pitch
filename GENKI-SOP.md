@@ -2,38 +2,54 @@
 # Standard Operating Procedure (SOP): Genki Lead Web Pitch Monorepo (`genki-lead-web-pitch`)
 
 ## 1. Prerequisites
+
 Before executing development, audit, or deployment tasks on `genki-lead-web-pitch`:
-- **Local Workspace:** `C:\repos\genki`
+
+- **Local Workspace:** `C:\repos\genki` (`pnpm` workspace root covering `packages/*` and `apps/*`)
 - **Remote GitHub Origin:** `https://github.com/jmiguelrj/genki-lead-web-pitch.git` (`main` branch)
 - **Remote Operations Host:** `root@<ops-vps-host>:/opt/genki-lead-web-pitch`
 - **Tooling Verification:**
-  - Local Windows: `node -v` (`>= v20`, currently `v24.13.0`), `pnpm -v` (`10.33.0`), `git --version` (`2.56.0.windows.2`).
+  - Local Windows: `node -v` (`>= 24.0.0`, currently `v24.13.0`), `pnpm -v` (`>= 10.0.0`, currently `10.33.0`), `git --version` (`2.56.0.windows.2`).
+  - Root Dev Toolchain: `@biomejs/biome` (`^2.6.7`), `typescript` (`^7.0.2`), `@types/node` (`^26.6.6`).
   - Remote Hetzner VPS: `ssh -o BatchMode=yes -o ConnectTimeout=10 root@<ops-vps-host> "git --version && docker -v && df -h /"`.
   - GitHub MCP Server (`github-mcp-server`): Verify active token in `<user-home>\.gemini\config\mcp_config.json` and `<user-home>\.gemini\antigravity-ide\mcp_config.json` before invoking repository operations.
-- **Clean Working Tree:** Verify `git status` is clean and synchronized with `origin/main` before starting a new task.
+- **Clean Working Tree:** Verify `git status` is clean and synchronized with `origin/main` before branching (`git checkout -b feat/task-<n>-<slug>`).
 
 ---
 
 ## 2. Execution Steps
 
-### 2.1 AI-Guardrail Modular Architecture & Line-Count Discipline
-1. **Tech Stack Boundaries:**
-   - **Framework:** Astro 5 (Islands Architecture) + React + TypeScript (Strict Mode) + Vite + SCSS Modules.
-   - **Package Manager:** `pnpm` workspace monorepo.
-2. **Enforce `< 250` Lines & Single Responsibility:**
-   - Every `.astro`, `.tsx`, `.ts`, `.scss`, and `.md` file must remain strictly under 250 lines (`wc -l`).
-   - Isolate interactive UI state into focused React islands; keep static layout shells and content sections in lightweight Astro components.
-3. **In-File Header & LF Normalization:**
-   - Stamp `@genki-alias: [GENKI-*]` on line 1 of tracked governance and architectural components.
-   - Normalize line endings to Unix LF (`\n`) with `git config core.autocrlf false`.
+### 2.1 AI-Guardrail Modular Architecture & Ownership Boundaries
 
-### 2.2 Sequential Task Execution & Event Registry Logging
-1. Every task must be logged sequentially in `genki-event-registry.md` with its ISO date (`[YYYY-MM-DD]`), task number, branch/commit reference, and concise architectural summary.
-2. Before modifying any configuration file (including IDE MCP configurations), create a `.bak` backup file to guarantee deterministic rollback.
+1. **Tech Stack & Workspace Layout:**
+   - **Workspaces (`pnpm-workspace.yaml`):** `packages/*` (shared `@genki-pitch/ui` primitives & design tokens) and `apps/*` (`apps/pitch-site` Astro 5 application).
+   - **Framework:** Astro 5 (Zero-JS default + `client:visible` React Islands) + React + Ultra-Strict TypeScript (`tsconfig.base.json`) + Vite + SCSS Modules (`*.module.scss`).
+2. **Governance & Role Boundaries (`CLAUDE.md` & `.github/CODEOWNERS`):**
+   - Non-engineers and AI agents compose pages inside `apps/pitch-site/src/pages/` using `@genki-pitch/ui` components.
+   - Core infrastructure (`/packages/ui/`, `/scripts/`, `/CLAUDE.md`, `/tsconfig.base.json`, `/.github/`) is protected by `.github/CODEOWNERS` (`@jmiguelrj`).
+3. **Token, Type, XSS & Line-Count Enforcement:**
+   - **Design Tokens Only:** Zero Tailwind CSS, zero raw hex codes (`#...`), and zero `rgb()`/`hsl()` literals in `*.module.scss`; bind exclusively to `var(--genki-*)`.
+   - **Type & XSS Safety:** Zero `: any`, `@ts-ignore`, `@ts-expect-error`, `dangerouslySetInnerHTML`, or `set:html` across `.ts`, `.tsx`, and `.astro`.
+   - **Modularity & Headers:** Keep every tracked file strictly `< 250` lines (`wc -l`), normalized to Unix LF (`\n`), with `@genki-alias: [GENKI-*]` on line 1 of governance and architectural files.
 
-### 2.3 Remote Operations Registry Synchronization (`<ops-vps-host>`)
-1. Commit and push verified changes from `C:\repos\genki` to `origin/main`.
-2. Synchronize `GENKI-SOP.md` and `genki-event-registry.md` (and repository state) to `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`:
+### 2.2 Mandatory Pre-Merge Verification Suite
+
+1. Run the deterministic verification suite from `C:\repos\genki` before committing or merging:
+
+   ```powershell
+   pnpm guardrails
+   pnpm lint
+   ```
+
+   _(Once workspace packages/apps are populated in Tasks #3+, execute the full `pnpm check:all` pipeline: `pnpm guardrails && pnpm lint && pnpm typecheck && pnpm build`.)_
+
+2. Log every task sequentially in `genki-event-registry.md` with its ISO timestamp, branch reference, and summary.
+
+### 2.3 Git Merge & Remote Operations Synchronization (`<ops-vps-host>`)
+
+1. Merge the verified feature branch into `main` (`git checkout main && git merge --no-ff <branch>`) and push to `origin/main`.
+2. Synchronize `/opt/genki-lead-web-pitch` on `root@<ops-vps-host>`:
+
    ```bash
    ssh -o BatchMode=yes -o ConnectTimeout=10 root@<ops-vps-host> "cd /opt/genki-lead-web-pitch && git pull origin main"
    ```
@@ -41,28 +57,33 @@ Before executing development, audit, or deployment tasks on `genki-lead-web-pitc
 ---
 
 ## 3. Expected Output
-1. **GitHub MCP Authentication (`get_me`):** Returns authenticated user `"login": "jmiguelrj"` with HTTP 200.
-2. **Git Repository & Remote Sync:** `git status` reports a clean working tree on `main` tracking `origin/main` (`https://github.com/jmiguelrj/genki-lead-web-pitch.git`).
-3. **Build & Type-Safety Gates (Monorepo):** Zero TypeScript compiler errors (`astro check && tsc --noEmit`), zero SCSS module resolution errors, and zero files `>= 250` lines.
-4. **Remote Operations Parity:** `ssh root@<ops-vps-host> "ls -la /opt/genki-lead-web-pitch"` confirms `GENKI-SOP.md` and `genki-event-registry.md` match local `main`.
+
+1. **AI Guardrail Engine (`pnpm guardrails`):** Prints the verification table reporting `0` violations for Rule 1 (`*.module.scss` token enforcement) and Rule 2 (`.ts`/`.tsx`/`.astro` type & XSS safety), exiting with code `0`.
+2. **Biome Linter & Formatter (`pnpm lint`):** `biome check .` exits with code `0` (`0` errors, `2`-space indent, single quotes, organized imports, `noExplicitAny: "error"`).
+3. **Type-Safety & Build Gates (`pnpm typecheck && pnpm build`):** Zero TypeScript compiler errors (`strict`, `noUncheckedIndexedAccess`, `noImplicitOverride`, `exactOptionalPropertyTypes`), zero SCSS module errors, and zero files `>= 250` lines.
+4. **Git & Remote VPS Parity:** `git status` reports a clean working tree on `main` tracking `origin/main`, and `ssh root@<ops-vps-host> "cd /opt/genki-lead-web-pitch && git log --oneline -n 4"` matches local `git log --oneline -n 4`.
 
 ---
 
 ## 4. Rollback
-If any step or verification gate fails during execution, execute the following rollback procedures:
-- **Local Workspace Rollback (Initial Bootstrap):**
+
+If any verification gate fails during execution, execute the applicable rollback procedure:
+
+- **Feature Branch Rollback (Local Workspace):**
+
   ```powershell
-  Remove-Item -Recurse -Force C:\repos\genki\.git, C:\repos\genki\GENKI-SOP.md, C:\repos\genki\genki-event-registry.md
+  git checkout main && git branch -D <feature-branch> && git reset --hard origin/main
   ```
-- **Local Workspace Rollback (Subsequent Commits):**
+
+- **Commit Rollback on `main` (Local + Remote VPS):**
+
   ```powershell
   git -C C:\repos\genki reset --hard <last-good-commit>
+  ssh -o BatchMode=yes root@<ops-vps-host> "cd /opt/genki-lead-web-pitch && git reset --hard <last-good-commit>"
   ```
-- **Remote VPS Rollback (`<ops-vps-host>`):**
-  ```bash
-  ssh -o BatchMode=yes root@<ops-vps-host> "rm -rf /opt/genki-lead-web-pitch"
-  ```
+
 - **MCP Configuration Rollback:**
+
   ```powershell
   Copy-Item <user-home>\.gemini\config\mcp_config.json.bak <user-home>\.gemini\config\mcp_config.json -Force
   Copy-Item <user-home>\.gemini\antigravity-ide\mcp_config.json.bak <user-home>\.gemini\antigravity-ide\mcp_config.json -Force

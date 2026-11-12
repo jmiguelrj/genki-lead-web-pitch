@@ -1,0 +1,8 @@
+# @genki-alias: [GENKI-GOV-CODEOWNERS]
+# Core design system, build guardrails, TypeScript base, and CI/CD require Lead Web Engineer review.
+
+/packages/ui/         @jmiguelrj
+/scripts/             @jmiguelrj
+/CLAUDE.md            @jmiguelrj
+/tsconfig.base.json   @jmiguelrj
+/.github/             @jmiguelrj
